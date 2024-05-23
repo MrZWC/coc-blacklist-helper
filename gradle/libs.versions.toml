@@ -1,4 +1,10 @@
 [versions]
+compileSdk = "34"
+minSdk = "28"
+targetSdk = "34"
+androidVersionCode = "1"
+androidVersionName = "1.1v"
+
 agp = "8.2.2"
 kotlin = "1.9.22"
 core-ktx = "1.10.1"
@@ -8,7 +14,15 @@ espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.9.0"
 constraintlayout = "2.1.4"
-
+rxlifecycle = "4.0.2"
+rxbinding = "4.0.0"
+rxjava = "3.1.8"
+rxandroid = "3.0.2"
+gson = "2.10.1"
+glide = "4.14.2"
+bindingcollectionadapter = "4.0.0"
+zwc-core = "2.0.20"
+#gson
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -18,7 +32,25 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+rxlifecycle = { group = "com.trello.rxlifecycle4", name = "rxlifecycle", version.ref = "rxlifecycle" }
+rxlifecycle-components = { group = "com.trello.rxlifecycle4", name = "rxlifecycle-components", version.ref = "rxlifecycle" }
+rxbinding = { group = "com.jakewharton.rxbinding4", name = "rxbinding", version.ref = "rxbinding" }
+rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava" }
+rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
+gson= { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+# recyclerview的databinding套装
+bindingcollectionadapter= { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter", version.ref = "bindingcollectionadapter" }
+bindingcollectionadapter-recyclerview= { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter-recyclerview", version.ref = "bindingcollectionadapter" }
+# glide
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+# zwc
+zwc-core= { group = "io.github.MrZWC", name = "core", version.ref = "zwc-core" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+[bundles]
+rxjava = ["rxjava", "rxandroid"]
+bindingcollectionadapter = ["bindingcollectionadapter", "bindingcollectionadapter-recyclerview"]
 
