@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -41,13 +42,16 @@ android {
         jvmTarget = "1.8"
     }
 }
-
+kapt {
+    generateStubs = true
+}
 dependencies {
     implementation(project(":baseLibrary"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,11 +1,14 @@
 package com.zwc.cocblacklisthelper
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import com.zwc.cocblacklisthelper.databinding.ActivityMainBinding
+import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
+import io.github.idonans.core.util.ToastUtil
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         val popup = PopupMenu(this, view)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.main, popup.menu)
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_add -> {
+                    startActivity(Intent(this, AddBlackListActivity::class.java))
+                    ToastUtil.show("添加")
+                }
+
+                else -> {}
+            }
+            return@setOnMenuItemClickListener false
+        }
         popup.show()
     }
 }

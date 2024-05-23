@@ -23,6 +23,7 @@ glide = "4.14.2"
 bindingcollectionadapter = "4.0.0"
 zwc-core = "2.0.20"
 timeber = "5.0.1"
+activity = "1.8.0"
 
 #gson
 [libraries]
@@ -49,6 +50,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 # zwc
 zwc-core= { group = "io.github.MrZWC", name = "core", version.ref = "zwc-core" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
