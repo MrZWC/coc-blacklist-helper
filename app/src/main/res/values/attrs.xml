@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="SearchEditText">
+        <attr name="se_hint" format="string" />
+    </declare-styleable>
+</resources>

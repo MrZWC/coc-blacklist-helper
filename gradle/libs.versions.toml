@@ -22,6 +22,8 @@ gson = "2.10.1"
 glide = "4.14.2"
 bindingcollectionadapter = "4.0.0"
 zwc-core = "2.0.20"
+timeber = "5.0.1"
+
 #gson
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -32,6 +34,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timeber" }
 rxlifecycle = { group = "com.trello.rxlifecycle4", name = "rxlifecycle", version.ref = "rxlifecycle" }
 rxlifecycle-components = { group = "com.trello.rxlifecycle4", name = "rxlifecycle-components", version.ref = "rxlifecycle" }
 rxbinding = { group = "com.jakewharton.rxbinding4", name = "rxbinding", version.ref = "rxbinding" }

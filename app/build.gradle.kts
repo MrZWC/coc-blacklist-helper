@@ -51,4 +51,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("io.github.MrZWC:roundlayout:1.0.0")
+    implementation(libs.timber)
 }
