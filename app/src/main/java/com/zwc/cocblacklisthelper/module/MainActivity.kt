@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityMainBinding
+import com.zwc.cocblacklisthelper.module.about.AboutActivity
 import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
 import com.zwc.cocblacklisthelper.module.formationcopy.FormationCopyActivity
 
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.action_formation_copy -> {
                     startActivity(Intent(this, FormationCopyActivity::class.java))
+                }
+
+                R.id.action_about -> {
+                    startActivity(Intent(this, AboutActivity::class.java))
                 }
 
                 else -> {}

@@ -6,7 +6,7 @@ import android.view.Window
 import com.socks.library.KLog
 import com.zwc.cocblacklisthelper.database.DataManager
 import com.zwc.cocblacklisthelper.database.entity.User
-import com.zwc.cocblacklisthelper.databinding.DialogTextContentLayoutBinding
+import com.zwc.cocblacklisthelper.databinding.DialogOneContentLayoutBinding
 import com.zwc.cocblacklisthelper.utils.StringUtils
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
@@ -22,8 +22,8 @@ import timber.log.Timber
  * DAte:2024-05-24 13:40
  * Description:描述
  */
-class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
-    private val binding: DialogTextContentLayoutBinding
+class OneContentDialog(activity: Activity, private var complete: () -> Unit) {
+    private val binding: DialogOneContentLayoutBinding
     private val mActivity: Activity = activity
     private val mViewDialog: ViewDialog
     private val scope = MainScope()
@@ -31,7 +31,7 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
 
     init {
         val viewGroup = activity.findViewById(Window.ID_ANDROID_CONTENT) as ViewGroup
-        binding = DialogTextContentLayoutBinding.inflate(activity.layoutInflater, viewGroup, false)
+        binding = DialogOneContentLayoutBinding.inflate(activity.layoutInflater, viewGroup, false)
         mViewDialog =
             ViewDialog.Builder(mActivity).setParentView(viewGroup).setContentView(binding.root)
                 .setCancelable(false).create()

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="设置"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_add"
         android:orderInCategory="100"
@@ -15,5 +11,10 @@
         android:id="@+id/action_formation_copy"
         android:orderInCategory="100"
         android:title="阵型复制工具"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="关于"
         app:showAsAction="never" />
 </menu>

@@ -1,7 +1,11 @@
 package com.zwc.cocblacklisthelper.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.zwc.cocblacklisthelper.database.entity.User
 
 /**
@@ -10,7 +14,24 @@ import com.zwc.cocblacklisthelper.database.entity.User
  * Description:描述
  */
 @Dao
-interface UserDao : BaseDAO<User> {
+interface UserDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(obj: User)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(list: MutableList<User>)
+
+    @Update
+    suspend fun update(obj: User)
+
+    @Update
+    suspend fun update(list: MutableList<User>)
+
+    @Delete
+    suspend fun delete(obj: User)
+
+    @Delete
+    suspend fun delete(list: MutableList<User>)
     /**
      * 更具id查询黑名单用户
      * @param userId String

@@ -14,7 +14,9 @@
         android:theme="@style/Theme.Cocblacklisthelper"
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
-
+        <activity
+            android:name=".module.about.AboutActivity"
+            android:exported="false" />
         <activity
             android:name=".module.MainActivity"
             android:exported="true"

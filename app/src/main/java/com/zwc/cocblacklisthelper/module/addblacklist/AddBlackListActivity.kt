@@ -8,13 +8,14 @@ import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityAddBlackListBinding
+import com.zwc.cocblacklisthelper.module.addblacklist.view.OneContentDialog
 import com.zwc.cocblacklisthelper.module.addblacklist.view.TextContentDialog
 
 class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackListViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -33,6 +34,12 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
                 viewModel.loadData()
             }
             textContentDialog.show()
+        }
+        viewModel.uc.showAddContentDialogObservable.observe(this) {
+            val oneContentDialog = OneContentDialog(this) {
+                viewModel.loadData()
+            }
+            oneContentDialog.show()
         }
     }
 

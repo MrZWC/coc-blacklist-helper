@@ -19,14 +19,13 @@ class DataManager() {
         val holder = DataManager()
     }
 
-    suspend fun insert(list: MutableList<User>) {
+    suspend fun insertOrReplace(list: MutableList<User>) {
         val userDao = getAppDatabase().userDao()
         userDao.insert(list)
     }
 
-    suspend fun insert(user: User) {
-        val userDao = getAppDatabase().userDao()
-        userDao.insert(user)
+    suspend fun insertOrReplace(user: User) {
+        insertOrReplace(mutableListOf(user))
     }
 
     suspend fun getAll(): MutableList<User> {
