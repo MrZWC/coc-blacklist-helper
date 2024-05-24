@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "cocblacklisthelper"
+rootProject.name = "coc-blacklist-helper"
 include(":app")
 include(":baseLibrary")

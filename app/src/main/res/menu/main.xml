@@ -11,4 +11,9 @@
         android:orderInCategory="100"
         android:title="添加黑名单"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_formation_copy"
+        android:orderInCategory="100"
+        android:title="阵型复制工具"
+        app:showAsAction="never" />
 </menu>

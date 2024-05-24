@@ -18,18 +18,42 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        create("releaseConfig") {
+            keyAlias = "coc"
+            keyPassword = "Zwc123456"
+            storeFile = file("../keystore/release_key.jks")
+            storePassword = "Zwc123456"
+        }
+        create("debugConfig") {
+            keyAlias = "coc"
+            keyPassword = "Zwc123456"
+            storeFile = file("../keystore/release_key.jks")
+            storePassword = "Zwc123456"
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs["releaseConfig"]
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs["debugConfig"]
+            isDebuggable = true
+        }
     }
     dataBinding {
-        enable=true
+        enable = true
     }
     viewBinding {
         enable = true
