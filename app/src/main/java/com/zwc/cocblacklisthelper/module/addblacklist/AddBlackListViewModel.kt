@@ -41,21 +41,15 @@ class AddBlackListViewModel(application: Application) :
     inner class UIChangeObservable {
         //显示编辑地址弹窗
         var showAddContentDialogObservable: SingleLiveEvent<Any>
-        var showAddOneDialogObservable: SingleLiveEvent<Any>
 
         init {
             showAddContentDialogObservable = SingleLiveEvent()
-            showAddOneDialogObservable = SingleLiveEvent()
         }
     }
 
     var addContentOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         uc.showAddContentDialogObservable.call()
     })
-    var addOneOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
-        uc.showAddOneDialogObservable.call()
-    })
-
     init {
         loadData()
     }

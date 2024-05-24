@@ -34,14 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="文本方式添加" />
-
-            <Button
-                onClickCommand="@{viewModel.addOneOnClickCommand}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:text="单挑添加" />
-
         </LinearLayout>
 
         <com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout

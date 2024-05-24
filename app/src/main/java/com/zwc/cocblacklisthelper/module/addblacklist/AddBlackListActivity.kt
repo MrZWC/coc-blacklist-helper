@@ -8,7 +8,6 @@ import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityAddBlackListBinding
-import com.zwc.cocblacklisthelper.module.addblacklist.view.OneContentDialog
 import com.zwc.cocblacklisthelper.module.addblacklist.view.TextContentDialog
 
 class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackListViewModel>() {
@@ -34,12 +33,6 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
                 viewModel.loadData()
             }
             textContentDialog.show()
-        }
-        viewModel.uc.showAddContentDialogObservable.observe(this) {
-            val oneContentDialog = OneContentDialog(this) {
-                viewModel.loadData()
-            }
-            oneContentDialog.show()
         }
     }
 

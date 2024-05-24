@@ -68,10 +68,11 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
                 val stringList = valueText.split("\n\uD83C\uDD94")
                 val list = mutableListOf<User>()
                 for (text in stringList) {
-                    if (text.contains("挂黑名单按格式") || text.contains("赛季黑名单")) {
+                    val trimText = text.trim()
+                    if (trimText.contains("挂黑名单按格式") || trimText.contains("赛季黑名单")) {
                         continue
                     }
-                    val content = "\uD83C\uDD94" + text
+                    val content = "\uD83C\uDD94" + trimText
                     KLog.i(TAG, content)
                     val userId = StringUtils.getStringId(content)
                     list.add(User(userId, content))
