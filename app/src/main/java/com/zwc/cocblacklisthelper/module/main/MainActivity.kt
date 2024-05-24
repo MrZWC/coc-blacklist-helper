@@ -1,4 +1,4 @@
-package com.zwc.cocblacklisthelper.module
+package com.zwc.cocblacklisthelper.module.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,18 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.zwc.baselibrary.base.BaseActivity
+import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityMainBinding
 import com.zwc.cocblacklisthelper.module.about.AboutActivity
 import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
 import com.zwc.cocblacklisthelper.module.formationcopy.FormationCopyActivity
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -28,6 +27,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         initListener()
+    }
+
+    override fun initContentView(savedInstanceState: Bundle?): Int {
+       return R.layout.activity_main
+    }
+
+    override fun initVariableId(): Int {
+        return BR.viewModel
     }
 
     private fun initListener() {

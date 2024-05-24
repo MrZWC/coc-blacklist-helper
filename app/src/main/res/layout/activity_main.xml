@@ -1,33 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".module.MainActivity">
+<layout>
 
-    <LinearLayout
+    <data>
+
+        <import type="me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LineManagers" />
+
+        <variable
+            name="viewModel"
+            type="com.zwc.cocblacklisthelper.module.main.MainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".module.main.MainActivity">
 
-        <com.zwc.cocblacklisthelper.widget.SearchEditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_weight="1"
-            app:se_hint="输入黑名单人员昵称" />
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/menu_btn"
-            android:layout_width="@dimen/dp_30"
+            <com.zwc.cocblacklisthelper.widget.SearchEditText
+                searchListener="@{viewModel.searchListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                app:se_hint="输入黑名单人员昵称" />
+
+            <ImageView
+                android:id="@+id/menu_btn"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:src="@mipmap/icon_menu" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:src="@mipmap/icon_menu" />
+            binding:itemBinding="@{viewModel.itemBinding}"
+            binding:items="@{viewModel.observableList}"
+            binding:layoutManager="@{LayoutManagers.linear()}"
+            binding:lineManager="@{LineManagers.vertical()}" />
+
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

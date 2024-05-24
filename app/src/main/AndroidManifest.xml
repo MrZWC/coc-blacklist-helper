@@ -18,7 +18,7 @@
             android:name=".module.about.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".module.MainActivity"
+            android:name=".module.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
