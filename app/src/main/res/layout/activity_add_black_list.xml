@@ -3,6 +3,12 @@
 
     <data>
 
+        <import type="me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LineManagers" />
+
         <variable
             name="viewModel"
             type="com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListViewModel" />
@@ -10,6 +16,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -17,8 +24,65 @@
         android:orientation="vertical"
         tools:context=".module.addblacklist.AddBlackListActivity">
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.zwc.round.RoundFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                app:rv_backgroundColor="@color/white"
+                app:rv_cornerRadius="6dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="文本添加，直接复制黑名单群文本即可"
+                    android:maxHeight="@dimen/dp_100"
+                    android:padding="@dimen/dp_10"
+                    android:text="@={viewModel.textObservableField}" />
+            </com.zwc.round.RoundFrameLayout>
+
+            <Button
+                onClickCommand="@{viewModel.textConfirmOnClickCommand}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                onClickCommand="@{viewModel.addContentOnClickCommand}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文本方式添加" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:text="单挑添加" />
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:itemBinding="@{viewModel.itemBinding}"
+            binding:items="@{viewModel.observableList}"
+            binding:layoutManager="@{LayoutManagers.linear()}"
+            binding:lineManager="@{LineManagers.vertical()}" />
+
     </LinearLayout>
 </layout>

@@ -24,6 +24,8 @@ bindingcollectionadapter = "4.0.0"
 zwc-core = "2.0.20"
 timeber = "5.0.1"
 activity = "1.8.0"
+klog = "2.0.0"
+room = "2.6.1"
 
 #gson
 [libraries]
@@ -41,21 +43,25 @@ rxlifecycle-components = { group = "com.trello.rxlifecycle4", name = "rxlifecycl
 rxbinding = { group = "com.jakewharton.rxbinding4", name = "rxbinding", version.ref = "rxbinding" }
 rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava" }
 rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
-gson= { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 # recyclerview的databinding套装
-bindingcollectionadapter= { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter", version.ref = "bindingcollectionadapter" }
-bindingcollectionadapter-recyclerview= { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter-recyclerview", version.ref = "bindingcollectionadapter" }
+bindingcollectionadapter = { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter", version.ref = "bindingcollectionadapter" }
+bindingcollectionadapter-recyclerview = { group = "me.tatarka.bindingcollectionadapter2", name = "bindingcollectionadapter-recyclerview", version.ref = "bindingcollectionadapter" }
 # glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 # zwc
-zwc-core= { group = "io.github.MrZWC", name = "core", version.ref = "zwc-core" }
+zwc-core = { group = "io.github.MrZWC", name = "core", version.ref = "zwc-core" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+klog = { group = "io.github.MrZWC", name = "klog", version.ref = "klog" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+room = { id = "androidx.room", version.ref = "room" }
 [bundles]
 rxjava = ["rxjava", "rxandroid"]
 bindingcollectionadapter = ["bindingcollectionadapter", "bindingcollectionadapter-recyclerview"]
-

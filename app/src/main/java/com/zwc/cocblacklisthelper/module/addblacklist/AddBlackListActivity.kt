@@ -8,21 +8,32 @@ import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityAddBlackListBinding
+import com.zwc.cocblacklisthelper.module.addblacklist.view.TextContentDialog
 
 class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackListViewModel>() {
-     override fun onCreate(savedInstanceState: Bundle?) {
-         super.onCreate(savedInstanceState)
-         enableEdgeToEdge()
-         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-             insets
-         }
-     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+
     override fun initData() {
         super.initData()
 
     }
+
+    override fun initViewObservable() {
+        super.initViewObservable()
+        viewModel.uc.showAddContentDialogObservable.observe(this) {
+            val textContentDialog = TextContentDialog(this)
+            textContentDialog.show()
+        }
+    }
+
     override fun initContentView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_add_black_list
     }

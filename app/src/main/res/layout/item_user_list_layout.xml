@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_6"
+        android:paddingTop="8dp"
+        android:paddingEnd="@dimen/dp_6"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.titleObservableField}"
+            android:textColor="@color/TextTitleColor"
+            android:textSize="@dimen/sp_16" />
+
+    </LinearLayout>
+</layout>

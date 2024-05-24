@@ -1,6 +1,8 @@
 package com.zwc.cocblacklisthelper.module
 
 import android.app.Application
+import com.socks.library.KLog
+import com.zwc.cocblacklisthelper.BuildConfig
 
 /**
  * author:zuoweichen
@@ -8,7 +10,18 @@ import android.app.Application
  * Description:描述
  */
 class MyApplication : Application() {
+
+    companion object {
+        private var instance: MyApplication? = null
+        fun getApplication(): MyApplication {
+            return instance!!
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
+        //Klog初始化
+        KLog.init(BuildConfig.DEBUG)
     }
 }
