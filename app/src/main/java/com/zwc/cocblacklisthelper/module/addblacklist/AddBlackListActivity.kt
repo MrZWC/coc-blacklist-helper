@@ -1,9 +1,12 @@
 package com.zwc.cocblacklisthelper.module.addblacklist
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
@@ -25,7 +28,13 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
 
     override fun initData() {
         super.initData()
-
+        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+            ) {
+                outRect.top = 2
+            }
+        })
     }
 
     override fun initViewObservable() {

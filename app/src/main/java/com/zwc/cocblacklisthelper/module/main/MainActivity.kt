@@ -1,6 +1,7 @@
 package com.zwc.cocblacklisthelper.module.main
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.MenuInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
@@ -29,6 +31,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             insets
         }
         initListener()
+        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+            ) {
+                outRect.top = 2
+            }
+        })
     }
 
     override fun initContentView(savedInstanceState: Bundle?): Int {
