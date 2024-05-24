@@ -16,6 +16,8 @@ import com.zwc.cocblacklisthelper.databinding.ActivityMainBinding
 import com.zwc.cocblacklisthelper.module.about.AboutActivity
 import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
 import com.zwc.cocblacklisthelper.module.formationcopy.FormationCopyActivity
+import com.zwc.cocblacklisthelper.widget.dialog.EditUserDialog
+import com.zwc.cocblacklisthelper.widget.dialog.MenuDialog
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initContentView(savedInstanceState: Bundle?): Int {
-       return R.layout.activity_main
+        return R.layout.activity_main
     }
 
     override fun initVariableId(): Int {
@@ -40,6 +42,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun initListener() {
         binding.menuBtn.setOnClickListener {
             showMenu(it)
+        }
+    }
+
+    override fun initViewObservable() {
+        super.initViewObservable()
+        viewModel.uc.showEditDialogObservable.observe(this) {
+            val editDialog = MenuDialog(this, it.data, true, {
+
+            }, {
+                //修改
+                val dialog = EditUserDialog(this, it) {
+
+                }
+                dialog.show()
+            })
+            editDialog.show()
         }
     }
 

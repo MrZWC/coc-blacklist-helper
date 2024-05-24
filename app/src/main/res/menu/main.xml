@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_add"
         android:orderInCategory="100"
-        android:title="添加黑名单"
+        android:title="管理黑名单"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_formation_copy"

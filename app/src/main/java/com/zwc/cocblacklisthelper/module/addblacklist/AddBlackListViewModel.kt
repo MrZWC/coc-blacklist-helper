@@ -31,6 +31,7 @@ class AddBlackListViewModel(application: Application) :
     private val TAG = this.javaClass.name
     var observableList = ObservableArrayList<BlackListUserItemViewModel>()
     var loadingShowTypeField = ObservableInt(MyLoadingLayout.LOADING)
+    var totalNumberObservableInt = ObservableInt(0)
     override fun onCreate() {
         super.onCreate()
     }
@@ -41,15 +42,18 @@ class AddBlackListViewModel(application: Application) :
     inner class UIChangeObservable {
         //显示编辑地址弹窗
         var showAddContentDialogObservable: SingleLiveEvent<Any>
+        var showEditDialogObservable: SingleLiveEvent<BlackListUserItemViewModel>
 
         init {
             showAddContentDialogObservable = SingleLiveEvent()
+            showEditDialogObservable = SingleLiveEvent()
         }
     }
 
     var addContentOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         uc.showAddContentDialogObservable.call()
     })
+
     init {
         loadData()
     }
@@ -74,15 +78,27 @@ class AddBlackListViewModel(application: Application) :
         val itemList = ObservableArrayList<BlackListUserItemViewModel>()
         withContext(Dispatchers.IO) {
             for (user in list) {
-                itemList.add(BlackListUserItemViewModel(this@AddBlackListViewModel, user))
+                itemList.add(BlackListUserItemViewModel(this@AddBlackListViewModel, user) {
+                    uc.showEditDialogObservable.value = it
+                })
             }
         }
         observableList.clear()
         observableList.addAll(itemList)
+        totalNumberObservableInt.set(observableList.size)
         loadingShowTypeField.set(MyLoadingLayout.CONTENT)
     }
 
     var itemBinding = ItemBinding.of<BlackListUserItemViewModel>(
         BR.viewModel, R.layout.item_user_list_layout
     )
+
+    fun delete(item: BlackListUserItemViewModel) {
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+        }) {
+            DataManager.getInstance().delete(item.data)
+            observableList.remove(item)
+        }
+    }
 }

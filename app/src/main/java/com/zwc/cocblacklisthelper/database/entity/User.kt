@@ -21,7 +21,7 @@ class User {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     val userId: String
-    val text: String
+    var text: String
 
     constructor(id: Int, userId: String, text: String) {
         this.id = id

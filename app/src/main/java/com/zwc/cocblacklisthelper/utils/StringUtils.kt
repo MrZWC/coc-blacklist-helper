@@ -1,5 +1,8 @@
 package com.zwc.cocblacklisthelper.utils
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import java.util.UUID
 
 /**
@@ -24,5 +27,14 @@ object StringUtils {
             return text.substring(index, endIndex)
         }
         return UUID.randomUUID().toString()
+    }
+     fun copyTextToClipboard(context: Context,text: String) {
+        val mClipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        mClipboard.setPrimaryClip(
+            ClipData.newPlainText(
+                this.javaClass.getSimpleName(),
+                text
+            )
+        )
     }
 }

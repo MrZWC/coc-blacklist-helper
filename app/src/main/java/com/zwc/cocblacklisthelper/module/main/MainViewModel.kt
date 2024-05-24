@@ -5,6 +5,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.viewModelScope
 import com.socks.library.KLog
 import com.zwc.baselibrary.base.BaseViewModel
+import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.database.entity.User
@@ -23,6 +24,19 @@ import timber.log.Timber
 class MainViewModel(application: Application) : BaseViewModel<MainModel>(application, MainModel()) {
     private val TAG = this.javaClass.name
     var observableList = ObservableArrayList<BlackListUserItemViewModel>()
+
+    //封装一个界面发生改变的观察者
+    var uc: UIChangeObservable = UIChangeObservable()
+
+    inner class UIChangeObservable {
+        //显示编辑地址弹窗
+        var showEditDialogObservable: SingleLiveEvent<BlackListUserItemViewModel>
+
+        init {
+            showEditDialogObservable = SingleLiveEvent()
+        }
+    }
+
     val searchListener = object : SearchEditText.SearchListener {
         override fun search(key: String) {
             searchData(key)
@@ -47,7 +61,9 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
         KLog.i(TAG, list)
         observableList.clear()
         for (user in list) {
-            observableList.add(BlackListUserItemViewModel(this, user))
+            observableList.add(BlackListUserItemViewModel(this, user) {
+                uc.showEditDialogObservable.value = it
+            })
         }
 
     }

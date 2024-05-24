@@ -33,6 +33,16 @@ class DataManager() {
         return userDao.queryAll()
     }
 
+    suspend fun delete(user: User) {
+        val userDao = getAppDatabase().userDao()
+        userDao.delete(user)
+    }
+
+    suspend fun update(user: User) {
+        val userDao = getAppDatabase().userDao()
+        userDao.update(user)
+    }
+
     suspend fun queryByKeyWord(key: String?): MutableList<User> {
         if (key.isNullOrEmpty()) {
             return mutableListOf()
