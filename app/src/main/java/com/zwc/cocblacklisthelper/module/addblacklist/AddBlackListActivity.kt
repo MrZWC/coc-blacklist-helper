@@ -29,7 +29,9 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showAddContentDialogObservable.observe(this) {
-            val textContentDialog = TextContentDialog(this)
+            val textContentDialog = TextContentDialog(this) {
+                viewModel.loadData()
+            }
             textContentDialog.show()
         }
     }

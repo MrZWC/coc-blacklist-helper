@@ -22,7 +22,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
-        val properties =  Properties()
+        val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         if (!properties.hasProperty("key.alias")) {
             throw IllegalArgumentException("key.alias not found")
@@ -33,9 +33,9 @@ android {
         if (!properties.hasProperty("key.store.password")) {
             throw IllegalArgumentException("key.store.password not found")
         }
-       val keyAliasString= properties.getProperty("key.alias")
-       val keyPasswordString= properties.getProperty("key.password")
-       val keyStorePasswordString= properties.getProperty("key.store.password")
+        val keyAliasString = properties.getProperty("key.alias")
+        val keyPasswordString = properties.getProperty("key.password")
+        val keyStorePasswordString = properties.getProperty("key.store.password")
         create("releaseConfig") {
             keyAlias = keyAliasString
             keyPassword = keyPasswordString

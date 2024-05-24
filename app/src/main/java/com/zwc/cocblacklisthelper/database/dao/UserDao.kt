@@ -16,14 +16,17 @@ interface UserDao : BaseDAO<User> {
      * @param userId String
      * @return User?
      */
-    /*@Query("SELECT * FROM user WHERE userId= :userId")
+    @Query("SELECT * FROM user WHERE userId= :userId")
     suspend fun queryById(userId: String): User?
-*/
+
     /**
      * 关键字查询黑名单用户
      * @param key String
      * @return MutableList<User>
      */
     @Query("SELECT * FROM user WHERE  text like '%' || :key || '%'")
-    suspend fun queryByKeyWord( key: String): MutableList<User>
+    suspend fun queryByKeyWord(key: String): MutableList<User>
+
+    @Query("SELECT * FROM user")
+    suspend fun queryAll(): MutableList<User>
 }

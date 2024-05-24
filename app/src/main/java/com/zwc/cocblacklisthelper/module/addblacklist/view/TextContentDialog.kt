@@ -10,36 +10,45 @@ import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.databinding.DialogTextContentLayoutBinding
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 /**
  * author:zuoweichen
  * DAte:2024-05-24 13:40
  * Description:描述
  */
-class TextContentDialog {
+class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
     private val binding: DialogTextContentLayoutBinding
-    private val mActivity: Activity
+    private val mActivity: Activity = activity
     private val mViewDialog: ViewDialog
     private val scope = MainScope()
     private val TAG = this.javaClass.name
 
-    constructor(activity: Activity) {
-        this.mActivity = activity
+    init {
         val viewGroup = activity.findViewById(Window.ID_ANDROID_CONTENT) as ViewGroup
         binding = DialogTextContentLayoutBinding.inflate(activity.layoutInflater, viewGroup, false)
         mViewDialog =
             ViewDialog.Builder(mActivity).setParentView(viewGroup).setContentView(binding.root)
-                .setCancelable(true).create()
+                .setCancelable(false).create()
         initData()
     }
 
     private fun initData() {
         binding.confirmBtn.setOnClickListener {
+            val text = "挂黑名单按格式（私）发我，必须私发，才能快速找到谁挂的谁，骗子结账也好找对人\n" +
+                    "5月赛季黑名单\n" +
+                    "\uD83C\uDD94少年的你✨言喏#LY0R0PQUP\n" +
+                    "\uD83C\uDD94我养了一只可爱的小猪在家里。"
             handleData(binding.editText.text.toString())
+            //handleData(text)
+        }
+        binding.cancelBtn.setOnClickListener {
+            hide()
         }
     }
 
@@ -49,21 +58,28 @@ class TextContentDialog {
             return
         }
 
-        scope.launch {
-            val data = withContext(Dispatchers.IO) {
-                val stringList = textString.split("\n")
+        scope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            ToastUtil.show("添加失败")
+            //"\uD83C\uDD94"
+        }) {
+            withContext(Dispatchers.IO) {
+                val valueText = "\n$textString"
+                val stringList = valueText.split("\n\uD83C\uDD94")
                 val list = mutableListOf<User>()
                 for (text in stringList) {
                     if (text.contains("挂黑名单按格式") || text.contains("赛季黑名单")) {
                         continue
                     }
-                    KLog.i(TAG, text)
-                    list.add(User("", text))
+                    val content = "\uD83C\uDD94" + text
+                    KLog.i(TAG, content)
+                    list.add(User("", content))
                 }
                 DataManager.getInstance().insert(list)
             }
             ToastUtil.show("添加成功")
-
+            complete()
+            hide()
         }
     }
 

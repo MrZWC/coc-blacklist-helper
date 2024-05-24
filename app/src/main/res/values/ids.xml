@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--loading-->
+    <item name="loading_retry_button" type="id" />
+    <item name="loading_empty_text" type="id" />
+
+</resources>

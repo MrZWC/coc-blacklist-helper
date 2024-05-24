@@ -29,6 +29,11 @@ class DataManager() {
         userDao.insert(user)
     }
 
+    suspend fun getAll(): MutableList<User> {
+        val userDao = getAppDatabase().userDao()
+        return userDao.queryAll()
+    }
+
     suspend fun queryByKeyWord(key: String?): MutableList<User> {
         if (key.isNullOrEmpty()) {
             return mutableListOf()
