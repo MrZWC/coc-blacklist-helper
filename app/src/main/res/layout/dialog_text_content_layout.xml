@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        app:rv_strokeWidth="1dp"
+        app:rv_strokeColor="@color/black"
         app:rv_backgroundColor="@color/white"
         app:rv_cornerRadius="6dp">
 
@@ -26,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="文本添加，直接复制黑名单群文本即可,会自动识别"
+            android:hint="文本添加，直接复制黑名单群文本即可,会自动识别,通过标签自动去重。"
             android:maxHeight="@dimen/dp_300"
             android:padding="@dimen/dp_10" />
     </com.zwc.round.RoundFrameLayout>

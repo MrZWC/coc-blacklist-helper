@@ -99,6 +99,7 @@ class AddBlackListViewModel(application: Application) :
         }) {
             DataManager.getInstance().delete(item.data)
             observableList.remove(item)
+            totalNumberObservableInt.set(totalNumberObservableInt.get() - 1)
         }
     }
 }

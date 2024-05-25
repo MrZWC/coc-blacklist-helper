@@ -11,27 +11,6 @@ import androidx.room.Relation
  * DAte:2024-05-24 11:16
  * Description:描述
  */
-@Entity(
-    indices = [Index(
-        value = ["userId","id"],
-        unique = true
-    )]
-)
-class User {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-    val userId: String
-    var text: String
-
-    constructor(id: Int, userId: String, text: String) {
-        this.id = id
-        this.userId = userId
-        this.text = text
-    }
-
-    @Ignore
-    constructor(userId: String, text: String) {
-        this.userId = userId
-        this.text = text
-    }
+@Entity
+class User(@PrimaryKey val userId: String, var text: String) {
 }

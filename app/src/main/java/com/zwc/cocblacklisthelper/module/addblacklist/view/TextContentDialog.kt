@@ -42,8 +42,7 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
         binding.confirmBtn.setOnClickListener {
             val text = "挂黑名单按格式（私）发我，必须私发，才能快速找到谁挂的谁，骗子结账也好找对人\n" +
                     "5月赛季黑名单\n" +
-                    "\uD83C\uDD94少年的你✨言喏#LY0R0PQUP\n" +
-                    "\uD83C\uDD94我养了一只可爱的小猪在家里。"
+                    "\uD83C\uDD94少年的你✨言喏#LY0R0PQUP\n"
             handleData(binding.editText.text.toString())
             //handleData(text)
         }
