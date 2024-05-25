@@ -20,6 +20,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开发人员昵称：八火"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/version_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="本软件下载和使用完全免费\n本软件仅供学习交流，请勿用于商业用途" />
+
     </LinearLayout>
 
 
