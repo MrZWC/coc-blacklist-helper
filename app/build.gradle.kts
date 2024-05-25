@@ -74,6 +74,19 @@ android {
     viewBinding {
         enable = true
     }
+    applicationVariants.all {
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl)
+                if (outputFile.name.endsWith(".apk")) {
+                    var bType = ""
+                    if (buildType.name == com.android.builder.core.BuilderConstants.DEBUG) {
+                        bType = ".debug"
+                    }
+                    outputFileName = "悟空COC黑名单工具v" + defaultConfig.versionName + bType + ".apk"
+                }
+
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
