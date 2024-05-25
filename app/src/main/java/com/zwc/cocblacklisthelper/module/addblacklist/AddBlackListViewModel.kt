@@ -17,6 +17,7 @@ import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.database.DataManager
 import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
+import com.zwc.cocblacklisthelper.widget.SearchEditText
 import com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
 import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -30,6 +31,7 @@ class AddBlackListViewModel(application: Application) :
     BaseViewModel<AddBlackListModel>(application, AddBlackListModel()) {
     private val TAG = this.javaClass.name
     var observableList = ObservableArrayList<BlackListUserItemViewModel>()
+    var allObservableList = ObservableArrayList<BlackListUserItemViewModel>()
     var loadingShowTypeField = ObservableInt(MyLoadingLayout.LOADING)
     var totalNumberObservableInt = ObservableInt(0)
     override fun onCreate() {
@@ -75,18 +77,25 @@ class AddBlackListViewModel(application: Application) :
     }
 
     private suspend fun showData(list: MutableList<User>) {
-        val itemList = ObservableArrayList<BlackListUserItemViewModel>()
-        withContext(Dispatchers.IO) {
+        val itemList = createItemList(list)
+        allObservableList.clear()
+        allObservableList.addAll(itemList)
+        observableList.clear()
+        observableList.addAll(allObservableList)
+        totalNumberObservableInt.set(observableList.size)
+        loadingShowTypeField.set(MyLoadingLayout.CONTENT)
+    }
+
+    private suspend fun createItemList(list: MutableList<User>): ObservableArrayList<BlackListUserItemViewModel> {
+        return withContext(Dispatchers.IO) {
+            val itemList = ObservableArrayList<BlackListUserItemViewModel>()
             for (user in list) {
                 itemList.add(BlackListUserItemViewModel(this@AddBlackListViewModel, user) {
                     uc.showEditDialogObservable.value = it
                 })
             }
+            itemList
         }
-        observableList.clear()
-        observableList.addAll(itemList)
-        totalNumberObservableInt.set(observableList.size)
-        loadingShowTypeField.set(MyLoadingLayout.CONTENT)
     }
 
     var itemBinding = ItemBinding.of<BlackListUserItemViewModel>(
@@ -99,7 +108,31 @@ class AddBlackListViewModel(application: Application) :
         }) {
             DataManager.getInstance().delete(item.data)
             observableList.remove(item)
+            allObservableList.remove(item)
             totalNumberObservableInt.set(totalNumberObservableInt.get() - 1)
+        }
+    }
+
+    val searchListener = SearchEditText.SearchListener { key -> searchData(key) }
+    private var firstEmpty = true
+    private fun searchData(key: String) {
+        if (key.isEmpty()) {
+            if (firstEmpty) {
+                firstEmpty = false
+                return
+            }
+            //显示所有黑名单
+            observableList.clear()
+            observableList.addAll(allObservableList)
+            return
+        }
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+        }) {
+            val users = DataManager.getInstance().queryByKeyWord(key)
+            val itemList = createItemList(users)
+            observableList.clear()
+            observableList.addAll(itemList)
         }
     }
 }

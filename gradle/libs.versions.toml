@@ -2,8 +2,8 @@
 compileSdk = "34"
 minSdk = "28"
 targetSdk = "34"
-androidVersionCode = "1"
-androidVersionName = "1.1v"
+androidVersionCode = "2"
+androidVersionName = "v1.1"
 
 agp = "8.2.2"
 kotlin = "1.9.22"

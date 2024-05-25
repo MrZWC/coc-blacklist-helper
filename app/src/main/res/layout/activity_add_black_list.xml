@@ -25,7 +25,7 @@
         tools:context=".module.addblacklist.AddBlackListActivity">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -34,6 +34,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="添加黑名单" />
+
+
+            <com.zwc.cocblacklisthelper.widget.SearchEditText
+                searchListener="@{viewModel.searchListener}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                app:se_hint="搜索人员" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="长按黑名单人员管理。" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,10 +64,6 @@
                 tools:text="总数：101" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="长按黑名单人员管理。" />
 
         <com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
             android:layout_width="match_parent"

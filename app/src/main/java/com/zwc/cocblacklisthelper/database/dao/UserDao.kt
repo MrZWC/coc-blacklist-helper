@@ -32,6 +32,7 @@ interface UserDao {
 
     @Delete
     suspend fun delete(list: MutableList<User>)
+
     /**
      * 更具id查询黑名单用户
      * @param userId String
@@ -50,4 +51,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user")
     suspend fun queryAll(): MutableList<User>
+
+    @Query("SELECT COUNT(*) FROM user")
+    suspend fun getSize(): Int
 }

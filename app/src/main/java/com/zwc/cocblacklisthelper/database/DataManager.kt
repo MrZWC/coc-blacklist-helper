@@ -43,6 +43,11 @@ class DataManager() {
         userDao.update(user)
     }
 
+    suspend fun getSize(): Int {
+        val userDao = getAppDatabase().userDao()
+        return userDao.getSize()
+    }
+
     suspend fun queryByKeyWord(key: String?): MutableList<User> {
         if (key.isNullOrEmpty()) {
             return mutableListOf()

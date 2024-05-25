@@ -1,13 +1,16 @@
 package com.zwc.cocblacklisthelper.module.main
 
 import android.app.Application
+import android.view.View
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.viewModelScope
 import com.socks.library.KLog
 import com.zwc.baselibrary.base.BaseViewModel
 import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
+import com.zwc.cocblacklisthelper.database.DataManager
 import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
 import com.zwc.cocblacklisthelper.widget.SearchEditText
@@ -24,6 +27,7 @@ import timber.log.Timber
 class MainViewModel(application: Application) : BaseViewModel<MainModel>(application, MainModel()) {
     private val TAG = this.javaClass.name
     var observableList = ObservableArrayList<BlackListUserItemViewModel>()
+    var tipsVisibilityObservable = ObservableInt(View.GONE)
 
     //封装一个界面发生改变的观察者
     var uc: UIChangeObservable = UIChangeObservable()
@@ -34,6 +38,28 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
 
         init {
             showEditDialogObservable = SingleLiveEvent()
+        }
+    }
+
+    init {
+        loadTips()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadTips()
+    }
+
+    private fun loadTips() {
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+        }) {
+            val size = DataManager.getInstance().getSize()
+            if (size == 0) {
+                tipsVisibilityObservable.set(View.VISIBLE)
+            } else {
+                tipsVisibilityObservable.set(View.GONE)
+            }
         }
     }
 

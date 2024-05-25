@@ -32,4 +32,12 @@ class BlackListUserItemViewModel(
     fun changeData(text: String) {
         titleObservableField.set(text)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (other is BlackListUserItemViewModel) {
+            return this.data.userId == other.data.userId
+        }
+        return super.equals(other)
+
+    }
 }

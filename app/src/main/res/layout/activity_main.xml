@@ -47,6 +47,14 @@
                 android:src="@mipmap/icon_menu" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.tipsVisibilityObservable}"
+            android:text="暂无数据，请通过右上角管理黑名单添加黑名单数据。"
+            android:textColor="@color/TextTitleColor"
+            android:textSize="@dimen/dp_18" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
