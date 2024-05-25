@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.MenuInflater
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,6 +17,7 @@ import com.zwc.cocblacklisthelper.databinding.ActivityMainBinding
 import com.zwc.cocblacklisthelper.module.about.AboutActivity
 import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
 import com.zwc.cocblacklisthelper.module.formationcopy.FormationCopyActivity
+import com.zwc.cocblacklisthelper.module.formationmanage.FormationManageActivity
 import com.zwc.cocblacklisthelper.widget.dialog.EditUserDialog
 import com.zwc.cocblacklisthelper.widget.dialog.MenuDialog
 
@@ -78,6 +78,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             when (it.itemId) {
                 R.id.action_add -> {
                     startActivity(Intent(this, AddBlackListActivity::class.java))
+                }
+                R.id.action_formation -> {
+                    startActivity(Intent(this, FormationManageActivity::class.java))
                 }
 
                 R.id.action_formation_copy -> {

@@ -15,9 +15,6 @@
         tools:ignore="LockedOrientationActivity"
         tools:targetApi="31">
         <activity
-            android:name=".module.about.AboutActivity"
-            android:exported="false" />
-        <activity
             android:name=".module.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -27,6 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".module.formationmanage.FormationManageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.about.AboutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".module.formationcopy.FormationCopyActivity"
             android:exported="true"

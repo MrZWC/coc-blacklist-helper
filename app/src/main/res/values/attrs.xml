@@ -17,4 +17,7 @@
             <enum name="empty" value="3" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="CommonTitleToolBar">
+        <attr name="ctb_title" format="string" />
+    </declare-styleable>
 </resources>

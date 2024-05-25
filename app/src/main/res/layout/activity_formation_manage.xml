@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zwc.cocblacklisthelper.module.formationmanage.FormationManageViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".module.formationmanage.FormationManageActivity">
+
+        <com.zwc.cocblacklisthelper.widget.CommonTitleToolBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ctb_title="阵型管理" />
+        <Button
+            android:id="@+id/add_btn"
+            onClickCommand="@{viewModel.addOnClickCommand}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:text="添加阵型"/>
+    </LinearLayout>
+</layout>

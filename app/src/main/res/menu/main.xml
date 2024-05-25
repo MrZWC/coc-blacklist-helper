@@ -8,6 +8,12 @@
         android:title="管理黑名单"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_formation"
+        android:orderInCategory="100"
+        android:title="阵型收藏"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_formation_copy"
         android:orderInCategory="100"
         android:title="阵型复制工具"
