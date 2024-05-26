@@ -1,5 +1,6 @@
 package com.zwc.cocblacklisthelper.module.formationmanage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -26,10 +27,12 @@ class FormationManageActivity :
         }
     }
 
+    private var addDialog: AddFormationDialog? = null
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showAddDialogObservable.observe(this) {
-            AddFormationDialog(this).show()
+            addDialog = AddFormationDialog(this)
+            addDialog!!.show()
         }
     }
 
@@ -39,5 +42,12 @@ class FormationManageActivity :
 
     override fun initVariableId(): Int {
         return BR.viewModel
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (addDialog != null) {
+            addDialog!!.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

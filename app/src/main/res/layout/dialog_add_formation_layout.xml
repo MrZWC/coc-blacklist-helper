@@ -26,7 +26,13 @@
         app:rv_strokeColor="@color/black"
         app:rv_strokeWidth="1dp">
 
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <LinearLayout
+            android:id="@+id/choose_image_tips_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -42,8 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="选择阵型图片" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相册的图片在保存后会复制到应用内，相册的图片可删除，"
+                android:textSize="10sp" />
         </LinearLayout>
     </com.zwc.round.RoundFrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
