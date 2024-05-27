@@ -10,10 +10,10 @@ import com.zwc.baselibrary.base.BaseViewModel
 import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
-import com.zwc.cocblacklisthelper.database.DataManager
-import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
 import com.zwc.cocblacklisthelper.widget.SearchEditText
+import com.zwc.databaselibrary.DataManager
+import com.zwc.databaselibrary.entity.User
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
@@ -54,7 +54,7 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
         }) {
-            val size = DataManager.getInstance().getSize()
+            val size = DataManager.getUserManager().getSize()
             if (size == 0) {
                 tipsVisibilityObservable.set(View.VISIBLE)
             } else {

@@ -1,4 +1,4 @@
-package com.zwc.cocblacklisthelper.database.dao
+package com.zwc.databaselibrary.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.zwc.cocblacklisthelper.database.entity.User
+import com.zwc.databaselibrary.entity.User
 
 /**
  * author:zuoweichen

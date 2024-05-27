@@ -5,7 +5,7 @@ import com.zwc.baselibrary.base.BaseViewModel
 import com.zwc.baselibrary.base.MultiItemViewModel
 import com.zwc.baselibrary.binding.command.BindingAction
 import com.zwc.baselibrary.binding.command.BindingCommand
-import com.zwc.cocblacklisthelper.database.entity.User
+import com.zwc.databaselibrary.entity.User
 
 /**
  * author:zuoweichen

@@ -1,4 +1,4 @@
-package com.zwc.cocblacklisthelper.database.entity
+package com.zwc.databaselibrary.entity
 
 import androidx.room.Entity
 import androidx.room.Ignore
@@ -13,4 +13,5 @@ import androidx.room.Relation
  */
 @Entity
 class User(@PrimaryKey val userId: String, var text: String) {
+
 }

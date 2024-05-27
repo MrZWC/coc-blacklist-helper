@@ -76,7 +76,7 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
                     val userId = StringUtils.getStringId(content)
                     list.add(User(userId, content))
                 }
-                DataManager.getInstance().insertOrReplace(list)
+                DataManager.getUserManager().insertOrReplace(list)
             }
             ToastUtil.show("添加成功")
             complete()

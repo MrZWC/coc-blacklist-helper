@@ -1,25 +1,20 @@
 package com.zwc.cocblacklisthelper.module.addblacklist
 
 import android.app.Application
-import android.view.View
 import androidx.databinding.ObservableArrayList
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.viewModelScope
-import com.socks.library.KLog
 import com.zwc.baselibrary.base.BaseViewModel
 import com.zwc.baselibrary.binding.command.BindingAction
 import com.zwc.baselibrary.binding.command.BindingCommand
 import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
-import com.zwc.cocblacklisthelper.database.DataManager
-import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
 import com.zwc.cocblacklisthelper.widget.SearchEditText
 import com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
-import io.github.idonans.core.util.ToastUtil
+import com.zwc.databaselibrary.DataManager
+import com.zwc.databaselibrary.entity.User
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -106,7 +101,7 @@ class AddBlackListViewModel(application: Application) :
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
         }) {
-            DataManager.getInstance().delete(item.data)
+            DataManager.getUserManager().delete(item.data)
             observableList.remove(item)
             allObservableList.remove(item)
             totalNumberObservableInt.set(totalNumberObservableInt.get() - 1)
@@ -129,7 +124,7 @@ class AddBlackListViewModel(application: Application) :
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
         }) {
-            val users = DataManager.getInstance().queryByKeyWord(key)
+            val users = DataManager.getUserManager().queryByKeyWord(key)
             val itemList = createItemList(users)
             observableList.clear()
             observableList.addAll(itemList)

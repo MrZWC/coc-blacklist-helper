@@ -1,11 +1,14 @@
-package com.zwc.cocblacklisthelper.database
+package com.zwc.databaselibrary
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.zwc.cocblacklisthelper.database.dao.UserDao
-import com.zwc.cocblacklisthelper.database.entity.User
+import com.zwc.databaselibrary.dao.FormationDao
+import com.zwc.databaselibrary.dao.UserDao
+import com.zwc.databaselibrary.entity.Formation
+import com.zwc.databaselibrary.entity.User
 
 /**
  * author:zuoweichen
@@ -13,10 +16,12 @@ import com.zwc.cocblacklisthelper.database.entity.User
  * Description:数据库管理
  */
 @Database(
-    entities = [User::class], exportSchema = true, version = 2
+    entities = [User::class, Formation::class], exportSchema = true, version = 3,
+    autoMigrations = [AutoMigration(from = 2, to = 3)]
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun formationDao(): FormationDao
 
     companion object {
         /**

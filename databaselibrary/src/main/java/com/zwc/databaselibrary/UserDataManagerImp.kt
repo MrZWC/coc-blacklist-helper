@@ -1,54 +1,55 @@
-package com.zwc.cocblacklisthelper.database
+package com.zwc.databaselibrary
 
-import com.zwc.cocblacklisthelper.database.entity.User
-import com.zwc.cocblacklisthelper.module.MyApplication
+import com.zwc.databaselibrary.common.DataContext
+import com.zwc.databaselibrary.entity.User
+
 
 /**
  * author:zuoweichen
- * DAte:2024-05-24 11:25
- * Description:数据管理
+ * DAte:2024-05-27 17:29
+ * Description:描述
  */
-class DataManager() {
+internal class UserDataManagerImp private constructor() : UserDataManager() {
     companion object {
-        fun getInstance(): DataManager {
+        fun getInstance(): UserDataManagerImp {
             return SingletonHolder.holder
         }
     }
 
     private object SingletonHolder {
-        val holder = DataManager()
+        val holder = UserDataManagerImp()
     }
 
-    suspend fun insertOrReplace(list: MutableList<User>) {
+    override suspend fun insertOrReplace(list: MutableList<User>) {
         val userDao = getAppDatabase().userDao()
         userDao.insert(list)
     }
 
-    suspend fun insertOrReplace(user: User) {
+    override suspend fun insertOrReplace(user: User) {
         insertOrReplace(mutableListOf(user))
     }
 
-    suspend fun getAll(): MutableList<User> {
+    override suspend fun getAll(): MutableList<User> {
         val userDao = getAppDatabase().userDao()
         return userDao.queryAll()
     }
 
-    suspend fun delete(user: User) {
+    override suspend fun delete(user: User) {
         val userDao = getAppDatabase().userDao()
         userDao.delete(user)
     }
 
-    suspend fun update(user: User) {
+    override suspend fun update(user: User) {
         val userDao = getAppDatabase().userDao()
         userDao.update(user)
     }
 
-    suspend fun getSize(): Int {
+    override suspend fun getSize(): Int {
         val userDao = getAppDatabase().userDao()
         return userDao.getSize()
     }
 
-    suspend fun queryByKeyWord(key: String?): MutableList<User> {
+    override suspend fun queryByKeyWord(key: String?): MutableList<User> {
         if (key.isNullOrEmpty()) {
             return mutableListOf()
         }
@@ -56,6 +57,6 @@ class DataManager() {
     }
 
     private fun getAppDatabase(): AppDatabase {
-        return AppDatabase.getDatabase(MyApplication.getApplication())
+        return AppDatabase.getDatabase(DataContext.getInstance().getContext())
     }
 }

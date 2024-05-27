@@ -1,8 +1,8 @@
 package com.zwc.cocblacklisthelper.module.main
 
 import com.zwc.baselibrary.base.BaseModel
-import com.zwc.cocblacklisthelper.database.DataManager
-import com.zwc.cocblacklisthelper.database.entity.User
+import com.zwc.databaselibrary.DataManager
+import com.zwc.databaselibrary.entity.User
 
 /**
  * author:zuoweichen
@@ -11,6 +11,6 @@ import com.zwc.cocblacklisthelper.database.entity.User
  */
 class MainModel : BaseModel() {
     suspend fun search(key: String): MutableList<User> {
-        return DataManager.getInstance().queryByKeyWord(key)
+        return DataManager.getUserManager().queryByKeyWord(key)
     }
 }

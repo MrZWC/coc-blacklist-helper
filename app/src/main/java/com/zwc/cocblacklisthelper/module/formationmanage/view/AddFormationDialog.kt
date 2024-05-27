@@ -74,6 +74,12 @@ class AddFormationDialog(val activity: FragmentActivity) {
         }
     }
 
+    /**
+     * 复制文件到应用内
+     * @param context Context
+     * @param fileUri Uri?
+     * @param fileName String?
+     */
     fun copyUriToAppInternalStorage(context: Context, fileUri: Uri?, fileName: String?) {
         try {
             // 获取内容解析器

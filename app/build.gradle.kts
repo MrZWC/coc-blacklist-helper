@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     id("org.jetbrains.kotlin.kapt")
-    id("androidx.room")
 }
 
 android {
@@ -94,15 +93,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 }
 kapt {
     generateStubs = true
 }
 dependencies {
     implementation(project(":baseLibrary"))
+    implementation(project(":databaselibrary"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -115,8 +112,6 @@ dependencies {
     implementation(libs.timber)
     //log
     implementation(libs.klog)
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
     // To use Kotlin annotation processing tool (kapt)
     kapt(libs.room.compiler)
 }

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "coc-blacklist-helper"
 include(":app")
 include(":baseLibrary")
+include(":databaselibrary")

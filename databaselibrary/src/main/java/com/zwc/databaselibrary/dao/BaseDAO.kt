@@ -1,4 +1,4 @@
-package com.zwc.cocblacklisthelper.database.dao
+package com.zwc.databaselibrary.dao
 
 import androidx.room.Delete
 import androidx.room.Insert
