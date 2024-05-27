@@ -4,20 +4,11 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import com.socks.library.KLog
-import com.zwc.cocblacklisthelper.database.DataManager
-import com.zwc.cocblacklisthelper.database.entity.User
 import com.zwc.cocblacklisthelper.databinding.DialogMenuLayoutBinding
-import com.zwc.cocblacklisthelper.databinding.DialogTextContentLayoutBinding
 import com.zwc.cocblacklisthelper.utils.StringUtils
+import com.zwc.databaselibrary.entity.User
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 /**
  * author:zuoweichen

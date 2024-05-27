@@ -3,9 +3,9 @@ package com.zwc.cocblacklisthelper.widget.dialog
 import android.app.Activity
 import android.view.ViewGroup
 import android.view.Window
-import com.zwc.cocblacklisthelper.database.DataManager
 import com.zwc.cocblacklisthelper.databinding.DialogEditUserLayoutBinding
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
+import com.zwc.databaselibrary.DataManager
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler

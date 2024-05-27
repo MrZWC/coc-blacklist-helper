@@ -112,6 +112,4 @@ dependencies {
     implementation(libs.timber)
     //log
     implementation(libs.klog)
-    // To use Kotlin annotation processing tool (kapt)
-    kapt(libs.room.compiler)
 }

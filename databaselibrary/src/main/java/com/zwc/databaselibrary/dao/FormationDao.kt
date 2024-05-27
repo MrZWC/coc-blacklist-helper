@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Update
-import com.zwc.cocblacklisthelper.database.entity.Formation
+import com.zwc.databaselibrary.entity.Formation
 
 /**
  * author:zuoweichen
