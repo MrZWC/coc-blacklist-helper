@@ -11,12 +11,17 @@ import com.zwc.databaselibrary.common.DataContext
  */
 interface DataManager {
     companion object {
+        fun init(application: Application) {
+            DataContext.getInstance().init(application)
+        }
+
         fun getUserManager(): UserDataManager {
             return UserDataManagerImp.getInstance()
         }
 
-        fun init(application: Application) {
-            DataContext.getInstance().init(application)
+
+        fun getFormationManager(): FormationDataManager {
+            return FormationDataManagerImp.getInstance()
         }
     }
 }

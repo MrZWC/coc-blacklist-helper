@@ -31,7 +31,9 @@ class FormationManageActivity :
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showAddDialogObservable.observe(this) {
-            addDialog = AddFormationDialog(this)
+            addDialog = AddFormationDialog(this){
+
+            }
             addDialog!!.show()
         }
     }

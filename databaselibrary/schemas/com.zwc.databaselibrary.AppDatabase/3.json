@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "25a3d02a17613c574ea8547070a350f8",
+    "identityHash": "7621da163c4aa7b3eaf1ee87b9e405af",
     "entities": [
       {
         "tableName": "User",
@@ -32,7 +32,7 @@
       },
       {
         "tableName": "Formation",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `imageFilePath` TEXT NOT NULL, `description` TEXT NOT NULL, `dataTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `imageFilePath` TEXT, `description` TEXT NOT NULL, `dataTime` INTEGER NOT NULL, `type` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -50,7 +50,7 @@
             "fieldPath": "imageFilePath",
             "columnName": "imageFilePath",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "description",
@@ -61,6 +61,12 @@
           {
             "fieldPath": "dataTime",
             "columnName": "dataTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -78,7 +84,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '25a3d02a17613c574ea8547070a350f8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7621da163c4aa7b3eaf1ee87b9e405af')"
     ]
   }
 }

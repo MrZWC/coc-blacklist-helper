@@ -14,12 +14,11 @@
         android:id="@+id/edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="@dimen/dp_10"
         android:hint="请在此处粘贴阵型链接 暂仅支持腾讯版"
-        android:inputType="textPersonName"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="wrap_content"

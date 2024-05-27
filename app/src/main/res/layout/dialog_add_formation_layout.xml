@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zwc.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -12,49 +11,173 @@
     app:rv_backgroundColor="@color/white"
     app:rv_cornerRadius="6dp">
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="请在此处粘贴阵型链接 暂仅支持腾讯版" />
+        android:text="阵型链接（必填）："
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/sp_12" />
 
     <com.zwc.round.RoundFrameLayout
-        android:id="@+id/choose_image_btn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
-        android:layout_marginTop="8dp"
-        app:rv_cornerRadius="6dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:rv_cornerRadius="4dp"
         app:rv_strokeColor="@color/black"
         app:rv_strokeWidth="1dp">
 
-        <ImageView
-            android:id="@+id/image"
+        <EditText
+            android:id="@+id/edit_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:id="@+id/choose_image_tips_layout"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:background="@null"
+            android:hint="请在此处粘贴阵型链接 暂仅支持腾讯版"
+            android:maxLines="2"
+            android:textSize="14sp" />
+    </com.zwc.round.RoundFrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="阵型图片（选填，但是最好填上否则不好找阵）："
+        android:textSize="@dimen/sp_12" />
+
+    <com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        app:aspectRatio="2.2222222">
+
+        <com.zwc.round.RoundFrameLayout
+            android:id="@+id/choose_image_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:rv_cornerRadius="6dp"
+            app:rv_strokeColor="@color/black"
+            app:rv_strokeWidth="1dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/icon_add" />
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/choose_image_tips_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选择阵型图片" />
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="相册的图片在保存后会复制到应用内，相册的图片可删除，"
-                android:textSize="10sp" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/icon_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择阵型图片" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="相册的图片在保存后会复制到应用内，相册的图片可删除，"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </com.zwc.round.RoundFrameLayout>
+
+    </com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类型：（默认冲杯)）"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="（必填）："
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/sp_12" />
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/ra_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="冲杯"
+            android:textSize="@dimen/sp_10" />
+
+        <RadioButton
+            android:id="@+id/ra_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联赛"
+            android:textSize="@dimen/sp_10" />
+
+        <RadioButton
+            android:id="@+id/ra_btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="部落战"
+            android:textSize="@dimen/sp_10" />
+
+        <RadioButton
+            android:id="@+id/ra_btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="艺术阵"
+            android:textSize="@dimen/sp_10" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="牛逼"
+            android:textSize="@dimen/sp_10" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="阵型描述（选填）："
+        android:textSize="@dimen/sp_12" />
+
+    <com.zwc.round.RoundFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:rv_cornerRadius="4dp"
+        app:rv_strokeColor="@color/black"
+        app:rv_strokeWidth="1dp">
+
+        <EditText
+            android:id="@+id/description_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入描述，例如：鲲阵、万杯大佬牛批阵"
+            android:maxLines="2"
+            android:textSize="14sp" />
     </com.zwc.round.RoundFrameLayout>
 
     <LinearLayout

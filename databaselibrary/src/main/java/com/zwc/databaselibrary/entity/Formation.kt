@@ -22,31 +22,51 @@ class Formation {
     /**
      * 阵型图片文件地址
      */
-    val imageFilePath: String
+    val imageFilePath: String?
 
     /**
      * 描述
      */
     val description: String
-
+    /**
+     * Type 0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批
+     */
+    val type: Int
     /**
      * 添加时间
      */
     val dataTime: Long
 
-    constructor(id: Int, url: String, imageFilePath: String, description: String, dataTime: Long) {
+
+
+    constructor(
+        id: Int,
+        url: String,
+        imageFilePath: String?,
+        description: String,
+        type: Int,
+        dataTime: Long
+    ) {
         this.id = id
         this.url = url
         this.imageFilePath = imageFilePath
         this.description = description
+        this.type = type
         this.dataTime = dataTime
     }
-
     @Ignore
-    constructor(url: String, imageFilePath: String, description: String, dataTime: Long) {
+    constructor(
+        url: String,
+        imageFilePath: String?,
+        description: String,
+        type: Int,
+        dataTime: Long
+    ) {
+        this.id = id
         this.url = url
         this.imageFilePath = imageFilePath
         this.description = description
+        this.type = type
         this.dataTime = dataTime
     }
 }

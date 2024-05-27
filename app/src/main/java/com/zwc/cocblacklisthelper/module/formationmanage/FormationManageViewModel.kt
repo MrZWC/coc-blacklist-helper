@@ -22,6 +22,14 @@ class FormationManageViewModel(application: Application) :
         }
     }
 
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
+
+    }
+
     var addOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         uc.showAddDialogObservable.call()
     })

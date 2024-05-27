@@ -8,20 +8,36 @@ import android.provider.MediaStore
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.socks.library.KLog
+import com.zwc.baselibrary.base.LoadingDialog
 import com.zwc.cocblacklisthelper.databinding.DialogAddFormationLayoutBinding
+import com.zwc.cocblacklisthelper.utils.KeyboardUtils
+import com.zwc.databaselibrary.DataManager
+import com.zwc.databaselibrary.entity.Formation
 import com.zwc.viewdialog.ViewDialog
+import io.github.idonans.core.util.ToastUtil
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
 
-class AddFormationDialog(val activity: FragmentActivity) {
+class AddFormationDialog(val activity: FragmentActivity, private val callBack: () -> Unit) {
     private val binding: DialogAddFormationLayoutBinding
     private val mViewDialog: ViewDialog
     private val chooseCode = 1001
     private val TAG = this.javaClass.name
+    private val loadingDialog = LoadingDialog(activity)
+    val scope = activity.lifecycleScope
+
+    /**
+     * 选择的图片 Uri
+     */
+    private var imageUri: Uri? = null
 
     init {
         val viewGroup = activity.findViewById(Window.ID_ANDROID_CONTENT) as ViewGroup
@@ -36,12 +52,17 @@ class AddFormationDialog(val activity: FragmentActivity) {
     }
 
     private fun initData() {
+        mViewDialog.decorView.setOnTouchListener { v, event ->
+            KeyboardUtils.closeKeyboard(activity)
+            false
+        }
         binding.chooseImageBtn.setOnClickListener {
             //选择图片
             openGallery()
         }
         binding.confirmBtn.setOnClickListener {
             //保存
+            save()
         }
         binding.cancelBtn.setOnClickListener {
             hide()
@@ -52,6 +73,37 @@ class AddFormationDialog(val activity: FragmentActivity) {
         val gallery = Intent(Intent.ACTION_PICK)
         gallery.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/")
         activity.startActivityForResult(gallery, chooseCode)
+    }
+
+    private fun save() {
+        val url = binding.editText.text.toString().trim()
+        if (url.isEmpty()) {
+            ToastUtil.show("请输入阵型链接")
+            return
+        }
+        loadingDialog.show()
+        scope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            loadingDialog.hide()
+        }) {
+            val imageFilePath = if (imageUri != null) {
+                copyUriToAppInternalStorage(
+                    activity,
+                    imageUri!!,
+                    "${System.currentTimeMillis()}.jpg"
+                )
+            } else {
+                null
+            }
+            val time = System.currentTimeMillis()
+            val data = Formation(url, imageFilePath, "", 0, time)
+            DataManager.getFormationManager().insertOrReplace(data)
+            loadingDialog.hide()
+            callBack()
+            hide()
+            ToastUtil.show("保存成功")
+        }
+
     }
 
     fun show() {
@@ -66,9 +118,9 @@ class AddFormationDialog(val activity: FragmentActivity) {
         if (requestCode == chooseCode && resultCode == Activity.RESULT_OK) {
             val uri = data?.data
             if (uri != null) {
+                imageUri = uri
                 KLog.i(TAG, uri.toString())
-                copyUriToAppInternalStorage(activity, uri, "${System.currentTimeMillis()}.jpg")
-                Glide.with(activity).load(uri).centerCrop().into(binding.image)
+                Glide.with(activity).load(imageUri).centerCrop().into(binding.image)
                 binding.chooseImageTipsLayout.visibility = ViewGroup.GONE
             }
         }
@@ -80,12 +132,12 @@ class AddFormationDialog(val activity: FragmentActivity) {
      * @param fileUri Uri?
      * @param fileName String?
      */
-    fun copyUriToAppInternalStorage(context: Context, fileUri: Uri?, fileName: String?) {
+    fun copyUriToAppInternalStorage(context: Context, fileUri: Uri, fileName: String): String? {
         try {
             // 获取内容解析器
             val contentResolver = context.contentResolver
             // 打开URI对应文件的输入流
-            val inputStream = contentResolver.openInputStream(fileUri!!)
+            val inputStream = contentResolver.openInputStream(fileUri)
 
             // 确保文件不为空
             if (inputStream != null) {
@@ -106,9 +158,13 @@ class AddFormationDialog(val activity: FragmentActivity) {
                 outputStream.flush()
                 outputStream.close()
                 inputStream.close()
+                return file.absolutePath
+            } else {
+                return null
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
+        return null
     }
 }
