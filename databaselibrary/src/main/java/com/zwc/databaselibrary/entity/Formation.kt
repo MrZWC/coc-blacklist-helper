@@ -22,7 +22,7 @@ class Formation {
     /**
      * 阵型图片文件地址
      */
-    val imageFilePath: String?
+    val imageFilePath: String
 
     /**
      * 描述
@@ -42,7 +42,7 @@ class Formation {
     constructor(
         id: Int,
         url: String,
-        imageFilePath: String?,
+        imageFilePath: String,
         description: String,
         type: Int,
         dataTime: Long
@@ -57,7 +57,7 @@ class Formation {
     @Ignore
     constructor(
         url: String,
-        imageFilePath: String?,
+        imageFilePath: String,
         description: String,
         type: Int,
         dataTime: Long

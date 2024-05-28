@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.socks.library.KLog
 import com.zwc.baselibrary.base.LoadingDialog
+import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.DialogAddFormationLayoutBinding
 import com.zwc.cocblacklisthelper.utils.KeyboardUtils
 import com.zwc.databaselibrary.DataManager
@@ -19,7 +20,9 @@ import com.zwc.databaselibrary.entity.Formation
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -81,22 +84,37 @@ class AddFormationDialog(val activity: FragmentActivity, private val callBack: (
             ToastUtil.show("请输入阵型链接")
             return
         }
+        if (imageUri == null) {
+            ToastUtil.show("请选择阵型图片")
+            return
+        }
         loadingDialog.show()
         scope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
             loadingDialog.hide()
+            ToastUtil.show(throwable.message)
         }) {
-            val imageFilePath = if (imageUri != null) {
-                copyUriToAppInternalStorage(
+            val data = withContext(Dispatchers.IO) {
+                val imageFilePath = copyUriToAppInternalStorage(
                     activity,
                     imageUri!!,
                     "${System.currentTimeMillis()}.jpg"
                 )
-            } else {
-                null
+                if (imageFilePath.isNullOrEmpty()) {
+
+                    throw Exception("复制图片到应用内失败")
+                }
+                val time = System.currentTimeMillis()
+                val type = when (binding.radioGroup.checkedRadioButtonId) {
+                    R.id.ra_btn1 -> 1
+                    R.id.ra_btn2 -> 2
+                    R.id.ra_btn3 -> 3
+                    R.id.ra_btn4 -> 4
+                    else -> 0
+                }
+                Formation(url, imageFilePath, binding.descriptionEdit.text.toString(), type, time)
             }
-            val time = System.currentTimeMillis()
-            val data = Formation(url, imageFilePath, "", 0, time)
+
             DataManager.getFormationManager().insertOrReplace(data)
             loadingDialog.hide()
             callBack()

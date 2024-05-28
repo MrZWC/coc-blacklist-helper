@@ -1,5 +1,6 @@
 package com.zwc.databaselibrary
 
+import com.zwc.databaselibrary.common.DataContext
 import com.zwc.databaselibrary.entity.Formation
 
 internal class FormationDataManagerImp private constructor() : FormationDataManager() {
@@ -14,18 +15,26 @@ internal class FormationDataManagerImp private constructor() : FormationDataMana
     }
 
     override suspend fun insertOrReplace(formation: Formation) {
-        TODO("Not yet implemented")
+        val formationDao = getAppDatabase().formationDao()
+        formationDao.insert(formation)
     }
 
     override suspend fun getAll(): MutableList<Formation> {
-        TODO("Not yet implemented")
+        val formationDao = getAppDatabase().formationDao()
+        return formationDao.queryAll()
     }
 
     override suspend fun delete(formation: Formation) {
-        TODO("Not yet implemented")
+        val formationDao = getAppDatabase().formationDao()
+        formationDao.delete(formation)
     }
 
     override suspend fun update(formation: Formation) {
-        TODO("Not yet implemented")
+        val formationDao = getAppDatabase().formationDao()
+        formationDao.update(formation)
+    }
+
+    private fun getAppDatabase(): AppDatabase {
+        return AppDatabase.getDatabase(DataContext.getInstance().getContext())
     }
 }

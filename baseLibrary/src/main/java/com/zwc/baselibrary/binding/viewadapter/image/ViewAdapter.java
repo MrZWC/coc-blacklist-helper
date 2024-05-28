@@ -31,6 +31,7 @@ public final class ViewAdapter {
         } else {
             Glide.with(imageView.getContext())
                     .load(placeholderRes)
+                    .centerCrop()
                     .into(imageView);
         }
     }

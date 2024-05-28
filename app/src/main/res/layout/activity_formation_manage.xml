@@ -3,6 +3,12 @@
 
     <data>
 
+        <import type="me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="com.zwc.baselibrary.binding.viewadapter.recyclerview.LineManagers" />
+
         <variable
             name="viewModel"
             type="com.zwc.cocblacklisthelper.module.formationmanage.FormationManageViewModel" />
@@ -10,6 +16,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,12 +27,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:ctb_title="阵型管理" />
+
         <Button
             android:id="@+id/add_btn"
             onClickCommand="@{viewModel.addOnClickCommand}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:text="添加阵型"/>
+            android:text="添加阵型"
+            android:textSize="@dimen/sp_12" />
+
+        <com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenButton
+            android:id="@+id/screen_status_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:ynShowType="@{viewModel.loadingShowTypeField}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.observableList}"
+                binding:layoutManager="@{LayoutManagers.linear()}"
+                binding:lineManager="@{LineManagers.vertical()}" />
+
+        </com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout>
+
     </LinearLayout>
 </layout>

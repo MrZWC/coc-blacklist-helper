@@ -10,6 +10,9 @@ import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityFormationManageBinding
 import com.zwc.cocblacklisthelper.module.formationmanage.view.AddFormationDialog
+import com.zwc.cocblacklisthelper.module.formationmanage.view.BaseScreen
+import com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenMessagePupWindow
+import io.github.idonans.lang.util.ViewUtil
 
 /**
  *阵型管理界面
@@ -28,10 +31,43 @@ class FormationManageActivity :
     }
 
     private var addDialog: AddFormationDialog? = null
+    private val screenStatusList = mutableListOf<BaseScreen>()
+    private var selectScreenStatusBean: BaseScreen? = null
+    override fun initData() {
+        super.initData()
+        //0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批
+        screenStatusList.add(BaseScreen(true, "全部", -1))
+        screenStatusList.add(BaseScreen(false, "冲杯", 0))
+        screenStatusList.add(BaseScreen(false, "联赛", 1))
+        screenStatusList.add(BaseScreen(false, "部落战", 2))
+        screenStatusList.add(BaseScreen(false, "艺术", 3))
+        screenStatusList.add(BaseScreen(false, "牛批", 4))
+        binding.screenStatusBtn.setText("全部")
+        ViewUtil.onClick(binding.screenStatusBtn) {
+            val messagePupWindow = ScreenMessagePupWindow(this@FormationManageActivity)
+            messagePupWindow.showPopupWindow(binding.screenStatusBtn, screenStatusList, 0)
+            messagePupWindow.setOnItemClickListener(object :
+                ScreenMessagePupWindow.OnItemClickListener {
+                override fun onItemClick(screen: BaseScreen) {
+                    if (screen.data.equals(selectScreenStatusBean?.data)) {
+                        return
+                    }
+                    for (baseScreen in screenStatusList) {
+                        baseScreen.selected = false
+                    }
+                    screen.selected = true
+                    selectScreenStatusBean = screen
+                    binding.screenStatusBtn.setText(screen.title)
+                    viewModel.loadData()
+                }
+            })
+        }
+    }
+
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showAddDialogObservable.observe(this) {
-            addDialog = AddFormationDialog(this){
+            addDialog = AddFormationDialog(this) {
 
             }
             addDialog!!.show()

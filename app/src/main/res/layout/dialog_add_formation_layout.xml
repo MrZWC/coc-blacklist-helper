@@ -11,12 +11,28 @@
     app:rv_backgroundColor="@color/white"
     app:rv_cornerRadius="6dp">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="阵型链接（必填）："
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="@dimen/sp_12" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阵型链接"
+            android:textColor="@color/TextTitleColor"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="（必填）："
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <com.zwc.round.RoundFrameLayout
         android:layout_width="match_parent"
@@ -36,13 +52,29 @@
             android:textSize="14sp" />
     </com.zwc.round.RoundFrameLayout>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="阵型图片（选填，但是最好填上否则不好找阵）："
-        android:textSize="@dimen/sp_12" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阵型图片"
+            android:textColor="@color/TextTitleColor"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="（必填,否则不好找阵）："
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
     <com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout
         android:layout_width="match_parent"
@@ -102,14 +134,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="类型：（默认冲杯)）"
-            android:textSize="@dimen/sp_12" />
+            android:textColor="@color/TextTitleColor"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="（必填）："
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="@dimen/sp_12" />
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
@@ -120,7 +155,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/ra_btn1"
+            android:id="@+id/ra_btn0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -128,27 +163,28 @@
             android:textSize="@dimen/sp_10" />
 
         <RadioButton
-            android:id="@+id/ra_btn2"
+            android:id="@+id/ra_btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="联赛"
             android:textSize="@dimen/sp_10" />
 
         <RadioButton
-            android:id="@+id/ra_btn3"
+            android:id="@+id/ra_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="部落战"
             android:textSize="@dimen/sp_10" />
 
         <RadioButton
-            android:id="@+id/ra_btn4"
+            android:id="@+id/ra_btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="艺术阵"
             android:textSize="@dimen/sp_10" />
 
         <RadioButton
+            android:id="@+id/ra_btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="牛逼"
@@ -160,7 +196,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="阵型描述（选填）："
-        android:textSize="@dimen/sp_12" />
+        android:textSize="@dimen/sp_12"
+        android:textStyle="bold" />
 
     <com.zwc.round.RoundFrameLayout
         android:layout_width="match_parent"
@@ -176,6 +213,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="请输入描述，例如：鲲阵、万杯大佬牛批阵"
+            android:maxLength="20"
             android:maxLines="2"
             android:textSize="14sp" />
     </com.zwc.round.RoundFrameLayout>
