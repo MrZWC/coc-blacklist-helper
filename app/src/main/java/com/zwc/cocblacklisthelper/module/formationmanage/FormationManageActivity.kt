@@ -35,6 +35,9 @@ class FormationManageActivity :
     private var selectScreenStatusBean: BaseScreen? = null
     override fun initData() {
         super.initData()
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
         //0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批
         screenStatusList.add(BaseScreen(true, "全部", -1))
         screenStatusList.add(BaseScreen(false, "冲杯", 0))
@@ -58,7 +61,7 @@ class FormationManageActivity :
                     screen.selected = true
                     selectScreenStatusBean = screen
                     binding.screenStatusBtn.setText(screen.title)
-                    viewModel.loadData()
+                    viewModel.loadData(screen.data)
                 }
             })
         }

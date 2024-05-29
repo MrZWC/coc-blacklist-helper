@@ -5,6 +5,7 @@ import com.zwc.databaselibrary.entity.Formation
 abstract class FormationDataManager {
     abstract suspend fun insertOrReplace(formation: Formation)
     abstract suspend fun getAll(): MutableList<Formation>
+    abstract suspend fun getDataByType(type: Int): MutableList<Formation>
     abstract suspend fun delete(formation: Formation)
     abstract suspend fun update(formation: Formation)
 

@@ -43,13 +43,13 @@ class FormationManageViewModel(application: Application) :
         loadData()
     }
 
-    fun loadData() {
+    fun loadData(type: Int = -1) {
         loadingShowTypeField.set(MyLoadingLayout.LOADING)
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
             loadingShowTypeField.set(MyLoadingLayout.ERROR)
         }) {
-            val loadAllData = model.loadData()
+            val loadAllData = model.loadData(type)
             if (loadAllData.isEmpty()) {
                 loadingShowTypeField.set(MyLoadingLayout.EMPTY)
             } else {
@@ -58,6 +58,7 @@ class FormationManageViewModel(application: Application) :
 
         }
     }
+
     private suspend fun showData(list: MutableList<Formation>) {
         val itemList = createItemList(list)
         observableList.clear()

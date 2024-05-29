@@ -24,6 +24,11 @@ internal class FormationDataManagerImp private constructor() : FormationDataMana
         return formationDao.queryAll()
     }
 
+    override suspend fun getDataByType(type: Int): MutableList<Formation> {
+        val formationDao = getAppDatabase().formationDao()
+        return formationDao.getDataByTypeIn(type)
+    }
+
     override suspend fun delete(formation: Formation) {
         val formationDao = getAppDatabase().formationDao()
         formationDao.delete(formation)

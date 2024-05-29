@@ -32,7 +32,12 @@ interface FormationDao {
 
     @Delete
     suspend fun delete(list: MutableList<Formation>)
+
     @Query("SELECT * FROM formation")
     suspend fun queryAll(): MutableList<Formation>
+
+    @Query("SELECT * FROM formation WHERE type=:type")
+    suspend fun getDataByTypeIn(type: Int): MutableList<Formation>
+
 
 }

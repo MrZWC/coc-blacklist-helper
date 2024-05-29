@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zwc.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:rv_cornerRadius="@dimen/dp_12"
+    app:rv_strokeWidth="1dp"
+    app:rv_strokeColor="@color/black"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="6dp"
+    android:paddingTop="3dp"
+    android:paddingEnd="6dp"
+    android:paddingBottom="3dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="阅读状态"
         android:textColor="@color/TextTitleColor"
-        android:textSize="@dimen/sp_12" />
+        android:textSize="@dimen/sp_12"
+        tools:text="全部" />
 
     <ImageView
         android:layout_width="@dimen/dp_8"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
         android:src="@drawable/arrow_down_fill_primary" />
-</LinearLayout>
+</com.zwc.round.RoundLinearLayout>
