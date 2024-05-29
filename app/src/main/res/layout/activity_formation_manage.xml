@@ -55,6 +55,7 @@
 
             <com.zwc.round.RoundTextView
                 android:id="@+id/add_btn"
+                onClickCommand="@{viewModel.addOnClickCommand}"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end|center_vertical"

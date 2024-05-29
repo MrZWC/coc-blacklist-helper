@@ -11,4 +11,8 @@ class FormationManageModel : BaseModel() {
         }
         return DataManager.getFormationManager().getDataByType(type)
     }
+
+    suspend fun delete(data: Formation) {
+        DataManager.getFormationManager().delete(data)
+    }
 }

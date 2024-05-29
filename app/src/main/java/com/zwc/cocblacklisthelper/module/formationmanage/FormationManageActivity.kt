@@ -1,10 +1,13 @@
 package com.zwc.cocblacklisthelper.module.formationmanage
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
@@ -12,6 +15,8 @@ import com.zwc.cocblacklisthelper.databinding.ActivityFormationManageBinding
 import com.zwc.cocblacklisthelper.module.formationmanage.view.AddFormationDialog
 import com.zwc.cocblacklisthelper.module.formationmanage.view.BaseScreen
 import com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenMessagePupWindow
+import com.zwc.cocblacklisthelper.widget.dialog.FormationMenuDialog
+import io.github.idonans.core.util.DimenUtil
 import io.github.idonans.lang.util.ViewUtil
 
 /**
@@ -38,6 +43,13 @@ class FormationManageActivity :
         binding.backBtn.setOnClickListener {
             finish()
         }
+        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
+            ) {
+                outRect.top = DimenUtil.dp2px(4f)
+            }
+        })
         //0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批
         screenStatusList.add(BaseScreen(true, "全部", -1))
         screenStatusList.add(BaseScreen(false, "冲杯", 0))
@@ -71,9 +83,15 @@ class FormationManageActivity :
         super.initViewObservable()
         viewModel.uc.showAddDialogObservable.observe(this) {
             addDialog = AddFormationDialog(this) {
-
+                viewModel.loadData()
             }
             addDialog!!.show()
+        }
+        viewModel.uc.showEditDialogObservable.observe(this) {
+            val dialog = FormationMenuDialog(this, it.data) {
+                viewModel.delete(it)
+            }
+            dialog.show()
         }
     }
 

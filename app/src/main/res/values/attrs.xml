@@ -23,4 +23,11 @@
     <declare-styleable name="AspectRatioFrameLayout">
         <attr name="aspectRatio" format="float" />
     </declare-styleable>
+    <declare-styleable name="ClipLayout">
+        <attr name="cl_roundSize" format="dimension|reference" />
+        <attr name="cl_roundAsCircle" format="boolean" />
+        <attr name="cl_showBorder" format="boolean" />
+        <attr name="cl_borderSize" format="dimension|reference" />
+        <attr name="cl_borderColor" format="color|reference" />
+    </declare-styleable>
 </resources>

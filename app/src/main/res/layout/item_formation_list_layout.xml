@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,19 +17,44 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout
+        <com.zwc.cocblacklisthelper.widget.ClipLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:aspectRatio="2.2222222">
+            android:background="@color/white"
+            android:padding="4dp"
+            app:cl_borderColor="#c96b6f"
+            app:cl_borderSize="2dp"
+            app:cl_roundSize="6dp"
+            app:cl_showBorder="true">
 
-            <ImageView
-                android:id="@+id/iv_formation_image"
+            <com.zwc.cocblacklisthelper.widget.ClipLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                url="@{viewModel.imageObservableFile}"
-                android:scaleType="centerCrop" />
-        </com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout>
+                android:layout_height="wrap_content"
+                app:cl_roundSize="6dp">
+
+                <com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:aspectRatio="2.2222222">
+
+                    <ImageView
+                        android:id="@+id/iv_formation_image"
+                        placeholderRes="@mipmap/ic_launcher"
+                        url="@{viewModel.imageObservableFile}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+                </com.zwc.cocblacklisthelper.widget.AspectRatioFrameLayout>
+            </com.zwc.cocblacklisthelper.widget.ClipLayout>
+        </com.zwc.cocblacklisthelper.widget.ClipLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{viewModel.descriptionObservableFile}"
+            tools:text="as ssssssssssssssssssssssssssssaaaaaaaa"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </layout>

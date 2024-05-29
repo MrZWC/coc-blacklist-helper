@@ -15,7 +15,7 @@ import io.github.idonans.core.util.ToastUtil
  * DAte:2024-05-24 13:40
  * Description:描述
  */
-class MenuDialog(
+class UserMenuDialog(
     val activity: Activity,
     val user: User,
     val main: Boolean,

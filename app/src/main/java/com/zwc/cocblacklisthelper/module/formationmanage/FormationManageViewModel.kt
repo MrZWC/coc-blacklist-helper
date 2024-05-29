@@ -13,6 +13,7 @@ import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.module.formationmanage.item.FormationItemViewModel
 import com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
 import com.zwc.databaselibrary.entity.Formation
+import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +44,9 @@ class FormationManageViewModel(application: Application) :
         loadData()
     }
 
-    fun loadData(type: Int = -1) {
+    private var tagType = -1
+    fun loadData(type: Int = tagType) {
+        tagType = type
         loadingShowTypeField.set(MyLoadingLayout.LOADING)
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
@@ -85,4 +88,14 @@ class FormationManageViewModel(application: Application) :
     var itemBinding = ItemBinding.of<FormationItemViewModel>(
         BR.viewModel, R.layout.item_formation_list_layout
     )
+
+    fun delete(itemViewModel: FormationItemViewModel) {
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            ToastUtil.show("删除失败")
+        }) {
+            model.delete(itemViewModel.data)
+            observableList.remove(itemViewModel)
+        }
+    }
 }

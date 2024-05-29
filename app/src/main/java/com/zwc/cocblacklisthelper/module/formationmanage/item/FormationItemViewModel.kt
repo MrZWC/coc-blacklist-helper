@@ -14,6 +14,7 @@ class FormationItemViewModel(
 ) :
     MultiItemViewModel<BaseViewModel<*>>(viewModel) {
     var imageObservableFile = ObservableField(data.imageFilePath)
+    var descriptionObservableFile = ObservableField(data.description)
     var onLongClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         onLongCLick(this)
     })

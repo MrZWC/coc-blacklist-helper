@@ -19,7 +19,7 @@ import com.zwc.cocblacklisthelper.module.addblacklist.AddBlackListActivity
 import com.zwc.cocblacklisthelper.module.formationcopy.FormationCopyActivity
 import com.zwc.cocblacklisthelper.module.formationmanage.FormationManageActivity
 import com.zwc.cocblacklisthelper.widget.dialog.EditUserDialog
-import com.zwc.cocblacklisthelper.widget.dialog.MenuDialog
+import com.zwc.cocblacklisthelper.widget.dialog.UserMenuDialog
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showEditDialogObservable.observe(this) {
-            val editDialog = MenuDialog(this, it.data, true, {
+            val editDialog = UserMenuDialog(this, it.data, true, {
 
             }, {
                 //修改

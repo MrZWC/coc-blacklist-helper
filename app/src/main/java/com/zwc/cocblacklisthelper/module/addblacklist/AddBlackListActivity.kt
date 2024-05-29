@@ -13,7 +13,7 @@ import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityAddBlackListBinding
 import com.zwc.cocblacklisthelper.module.addblacklist.view.TextContentDialog
 import com.zwc.cocblacklisthelper.widget.dialog.EditUserDialog
-import com.zwc.cocblacklisthelper.widget.dialog.MenuDialog
+import com.zwc.cocblacklisthelper.widget.dialog.UserMenuDialog
 
 class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackListViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
             textContentDialog.show()
         }
         viewModel.uc.showEditDialogObservable.observe(this) {
-            val editDialog = MenuDialog(this, it.data,false, {
+            val editDialog = UserMenuDialog(this, it.data,false, {
                 //删除
                 viewModel.delete(it)
             }, {
