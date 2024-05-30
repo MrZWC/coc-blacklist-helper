@@ -83,6 +83,4 @@ dependencies {
     api("io.github.idonans.systeminsets:systeminsets:2.0.3")
     api("io.github.MrZWC:lang:2.0.13")
     api("org.tukaani:xz:1.9")
-    //gson
-    api(libs.gson)
 }

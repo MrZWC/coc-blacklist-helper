@@ -1,10 +1,13 @@
 package com.zwc.cocblacklisthelper.module.addblacklist.view
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
 import android.view.ViewGroup
 import android.view.Window
 import com.socks.library.KLog
 import com.zwc.cocblacklisthelper.databinding.DialogTextContentLayoutBinding
+import com.zwc.cocblacklisthelper.utils.KeyboardUtils
 import com.zwc.cocblacklisthelper.utils.StringUtils
 import com.zwc.databaselibrary.DataManager
 import com.zwc.databaselibrary.entity.User
@@ -34,8 +37,23 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
         binding = DialogTextContentLayoutBinding.inflate(activity.layoutInflater, viewGroup, false)
         mViewDialog =
             ViewDialog.Builder(mActivity).setParentView(viewGroup).setContentView(binding.root)
+                .setOnHideListener {
+                    KeyboardUtils.closeKeyboard(activity)
+                }
+                .setOnShowListener {
+                    showKeyboard()
+                }
                 .setCancelable(false).create()
         initData()
+    }
+
+    private fun showKeyboard() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.editText.isFocusable = true
+            binding.editText.isFocusableInTouchMode = true
+            binding.editText.requestFocus()
+            KeyboardUtils.showKeyboard(mActivity, binding.editText)
+        }, 200)
     }
 
     private fun initData() {

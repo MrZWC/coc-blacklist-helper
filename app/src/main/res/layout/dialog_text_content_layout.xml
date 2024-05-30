@@ -1,72 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zwc.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:binding="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginStart="@dimen/dp_10"
-    android:layout_marginEnd="@dimen/dp_20"
-    android:orientation="vertical"
-    android:padding="@dimen/dp_10"
-    app:rv_backgroundColor="@color/white"
-    app:rv_cornerRadius="@dimen/dp_10">
+    android:layout_height="match_parent">
 
-    <com.zwc.round.RoundFrameLayout
+    <com.zwc.round.RoundLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:rv_strokeWidth="1dp"
-        app:rv_strokeColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
         app:rv_backgroundColor="@color/white"
-        app:rv_cornerRadius="6dp">
+        app:rv_cornerRadius="@dimen/dp_10">
 
-        <EditText
-            android:id="@+id/edit_text"
+        <com.zwc.round.RoundFrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="文本添加，直接复制黑名单群文本即可,会自动识别,通过标签自动去重。"
-            android:maxHeight="@dimen/dp_300"
-            android:padding="@dimen/dp_10" />
-    </com.zwc.round.RoundFrameLayout>
+            android:layout_weight="1"
+            app:rv_backgroundColor="@color/white"
+            app:rv_cornerRadius="6dp"
+            app:rv_strokeColor="@color/black"
+            app:rv_strokeWidth="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_20"
-        android:orientation="horizontal">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/cancel_btn"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="取消" />
-        </FrameLayout>
+                android:background="@null"
+                android:hint="文本添加，直接复制黑名单群文本即可,会自动识别,通过标签自动去重。"
+                android:maxHeight="@dimen/dp_300"
+                android:padding="@dimen/dp_10" />
+        </com.zwc.round.RoundFrameLayout>
 
-        <FrameLayout
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/confirm_btn"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="确认" />
-        </FrameLayout>
+                android:layout_weight="1">
 
+                <Button
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="取消" />
+            </FrameLayout>
 
-    </LinearLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-</com.zwc.round.RoundLinearLayout>
+                <Button
+                    android:id="@+id/confirm_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="确认" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </com.zwc.round.RoundLinearLayout>
+
+</androidx.core.widget.NestedScrollView>
