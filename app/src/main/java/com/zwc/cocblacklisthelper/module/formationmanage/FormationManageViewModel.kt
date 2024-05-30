@@ -39,12 +39,11 @@ class FormationManageViewModel(application: Application) :
             showAddDialogObservable = SingleLiveEvent()
         }
     }
-
+    private var tagType = -1
     init {
         loadData()
     }
 
-    private var tagType = -1
     fun loadData(type: Int = tagType) {
         tagType = type
         loadingShowTypeField.set(MyLoadingLayout.LOADING)
