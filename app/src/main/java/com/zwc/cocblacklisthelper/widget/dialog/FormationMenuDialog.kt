@@ -1,13 +1,17 @@
 package com.zwc.cocblacklisthelper.widget.dialog
 
 import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.view.ViewGroup
 import android.view.Window
+import androidx.core.content.FileProvider
 import com.zwc.cocblacklisthelper.databinding.DialogFromationMenuLayoutBinding
 import com.zwc.cocblacklisthelper.utils.CocUtils
 import com.zwc.cocblacklisthelper.utils.StringUtils
 import com.zwc.databaselibrary.entity.Formation
 import com.zwc.viewdialog.ViewDialog
+import java.io.File
 
 /**
  * author:zuoweichen
@@ -39,7 +43,7 @@ class FormationMenuDialog(
             CocUtils.checkData(activity, data.url)
         }
         binding.shareBtn.setOnClickListener {
-
+            share()
         }
         binding.copyAll.setOnClickListener {
             StringUtils.copyTextToClipboard(activity, data.url)
@@ -52,6 +56,10 @@ class FormationMenuDialog(
 
     }
 
+    private fun share() {
+        ShareDialog(activity, data).show()
+        hide()
+    }
 
     fun show() {
         mViewDialog.show()
