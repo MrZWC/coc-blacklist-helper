@@ -37,7 +37,7 @@
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:layout_weight="1"
-                app:se_hint="输入黑名单人员昵称" />
+                app:se_hint="输入黑名单人员昵称或标签" />
 
             <ImageView
                 android:id="@+id/menu_btn"

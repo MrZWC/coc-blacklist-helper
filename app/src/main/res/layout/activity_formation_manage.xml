@@ -65,12 +65,27 @@
                 app:rv_cornerRadius="@dimen/dp_12" />
         </FrameLayout>
 
-        <com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenButton
-            android:id="@+id/screen_status_btn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginTop="6dp" />
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenButton
+                android:id="@+id/screen_status_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="长按阵型操作。"
+                android:layout_marginStart="@dimen/dp_10"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+
 
         <com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
             android:layout_width="match_parent"

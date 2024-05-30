@@ -55,15 +55,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="长按黑名单人员管理。" />
+                android:text='@{"总数："+viewModel.totalNumberObservableInt}'
+                android:textSize="@dimen/sp_16"
+                tools:text="总数：101" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
-                android:text='@{"总数："+viewModel.totalNumberObservableInt}'
-                android:textSize="@dimen/sp_16"
-                tools:text="总数：101" />
+                android:text="长按黑名单人员管理（首页搜索结果一样)。" />
+
+
         </LinearLayout>
 
 
