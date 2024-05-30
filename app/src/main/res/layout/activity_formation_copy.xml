@@ -9,6 +9,10 @@
     android:orientation="vertical"
     tools:context=".module.formationcopy.FormationCopyActivity">
 
+    <com.zwc.cocblacklisthelper.widget.CommonTitleToolBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ctb_title="阵型复制" />
 
     <EditText
         android:id="@+id/edit_text"
