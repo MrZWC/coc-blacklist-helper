@@ -49,6 +49,8 @@
         </activity>
         <activity
             android:name=".module.addblacklist.AddBlackListActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:screenOrientation="portrait" />
 

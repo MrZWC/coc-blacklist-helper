@@ -7,10 +7,10 @@
     android:orientation="vertical"
     tools:context=".module.about.AboutActivity">
 
-    <Toolbar
+    <com.zwc.cocblacklisthelper.widget.CommonTitleToolBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:title="关于" />
+        app:ctb_title="关于" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开发人员昵称：八火"
+            android:text="开发者游戏昵称：八火"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,13 +35,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:text="为爱发电" />
+            android:text="联系邮箱：1844536255@qq.com" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="本软件下载和使用完全免费\n本软件仅供学习交流，请勿用于商业用途" />
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="为爱发电,有其他需求、反馈bug、建议请发邮件，\n如果有空我会回复。接有偿定制价格不便宜" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本软件下载和使用完全免费\n本软件仅供学习交流，请勿用于商业用途\n 私自商用的没得小🐔🐔。" />
 
     </LinearLayout>
 

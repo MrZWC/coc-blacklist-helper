@@ -48,13 +48,40 @@
             </com.zwc.cocblacklisthelper.widget.ClipLayout>
         </com.zwc.cocblacklisthelper.widget.ClipLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类型："
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{viewModel.typeObservableFile}'
+                android:textColor="@color/TextTitleColor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:layout_marginStart="6dp"
+                android:text="@{viewModel.timeObservableFile}"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="@{viewModel.descriptionObservableFile}"
-            tools:text="as ssssssssssssssssssssssssssssaaaaaaaa"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="as ssssssssssssssssssssssssssssaaaaaaaa" />
 
     </LinearLayout>
 </layout>

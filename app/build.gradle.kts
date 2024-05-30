@@ -49,7 +49,7 @@ android {
     }
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             signingConfig = signingConfigs["releaseConfig"]
             isDebuggable = false
             proguardFiles(
