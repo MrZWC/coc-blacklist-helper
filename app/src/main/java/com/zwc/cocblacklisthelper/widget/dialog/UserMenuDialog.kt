@@ -42,12 +42,13 @@ class UserMenuDialog(
         }
         binding.copyAll.setOnClickListener {
             StringUtils.copyTextToClipboard(activity, user.text)
+            ToastUtil.show("已复制到剪贴板")
             hide()
         }
         binding.copyTag.setOnClickListener {
             if (user.userId.startsWith("#")) {
                 StringUtils.copyTextToClipboard(activity, user.userId)
-                ToastUtil.show("复制成功")
+                ToastUtil.show("已复制到剪贴板")
             } else {
                 ToastUtil.show("标签为自定义标签，或者为空")
             }

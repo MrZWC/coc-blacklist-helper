@@ -1,17 +1,14 @@
 package com.zwc.cocblacklisthelper.widget.dialog
 
 import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.view.ViewGroup
 import android.view.Window
-import androidx.core.content.FileProvider
 import com.zwc.cocblacklisthelper.databinding.DialogFromationMenuLayoutBinding
 import com.zwc.cocblacklisthelper.utils.CocUtils
 import com.zwc.cocblacklisthelper.utils.StringUtils
 import com.zwc.databaselibrary.entity.Formation
 import com.zwc.viewdialog.ViewDialog
-import java.io.File
+import io.github.idonans.core.util.ToastUtil
 
 /**
  * author:zuoweichen
@@ -47,6 +44,7 @@ class FormationMenuDialog(
         }
         binding.copyAll.setOnClickListener {
             StringUtils.copyTextToClipboard(activity, data.url)
+            ToastUtil.show("已复制到剪贴板")
             hide()
         }
         binding.deleteBtn.setOnClickListener {
