@@ -26,7 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="直接使用" />
-
+        <Button
+            android:id="@+id/copy_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="复制连接" />
         <Button
             android:id="@+id/share_btn"
             android:layout_width="wrap_content"

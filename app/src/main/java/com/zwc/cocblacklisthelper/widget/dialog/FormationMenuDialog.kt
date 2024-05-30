@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.view.Window
 import com.zwc.cocblacklisthelper.databinding.DialogFromationMenuLayoutBinding
 import com.zwc.cocblacklisthelper.utils.CocUtils
+import com.zwc.cocblacklisthelper.utils.StringUtils
 import com.zwc.databaselibrary.entity.Formation
 import com.zwc.viewdialog.ViewDialog
 
@@ -40,7 +41,10 @@ class FormationMenuDialog(
         binding.shareBtn.setOnClickListener {
 
         }
-
+        binding.copyAll.setOnClickListener {
+            StringUtils.copyTextToClipboard(activity, data.url)
+            hide()
+        }
         binding.deleteBtn.setOnClickListener {
             delete()
             hide()

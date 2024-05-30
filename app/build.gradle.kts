@@ -81,7 +81,8 @@ android {
                     if (buildType.name == com.android.builder.core.BuilderConstants.DEBUG) {
                         bType = ".debug"
                     }
-                    outputFileName = "悟空COC黑名单工具v" + defaultConfig.versionName + bType + ".apk"
+                    outputFileName =
+                        "悟空COC黑名单工具v" + defaultConfig.versionName + bType + ".apk"
                 }
 
         }
@@ -112,4 +113,11 @@ dependencies {
     implementation(libs.timber)
     //log
     implementation(libs.klog)
+    // 友盟统计SDK
+    implementation("com.umeng.umsdk:common:9.4.7")// 必选
+    implementation("com.umeng.umsdk:asms:1.4.1")// 必选
+    // 分享相关库
+    implementation("com.umeng.umsdk:share-core:7.1.6")//分享核心库，必选
+    implementation("com.umeng.umsdk:share-board:7.1.6")//分享面板功能，可选
+    implementation("com.umeng.umsdk:link:1.1.0")//集成智能超链U-Link，可选，如要统计分享回流次数和分享新增用户指标则必选
 }
