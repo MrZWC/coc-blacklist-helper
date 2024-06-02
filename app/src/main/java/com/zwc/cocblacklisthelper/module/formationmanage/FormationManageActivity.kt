@@ -14,6 +14,7 @@ import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.ActivityFormationManageBinding
 import com.zwc.cocblacklisthelper.module.formationmanage.view.AddFormationDialog
 import com.zwc.cocblacklisthelper.module.formationmanage.view.BaseScreen
+import com.zwc.cocblacklisthelper.module.formationmanage.view.ImageDetailsDialog
 import com.zwc.cocblacklisthelper.module.formationmanage.view.ScreenMessagePupWindow
 import com.zwc.cocblacklisthelper.widget.dialog.FormationMenuDialog
 import io.github.idonans.core.util.DimenUtil
@@ -57,6 +58,7 @@ class FormationManageActivity :
         screenStatusList.add(BaseScreen(false, "部落战", 2))
         screenStatusList.add(BaseScreen(false, "艺术", 3))
         screenStatusList.add(BaseScreen(false, "牛批", 4))
+        screenStatusList.add(BaseScreen(false, "网红", 5))
         binding.screenStatusBtn.setText("全部")
         ViewUtil.onClick(binding.screenStatusBtn) {
             val messagePupWindow = ScreenMessagePupWindow(this@FormationManageActivity)
@@ -91,6 +93,10 @@ class FormationManageActivity :
             val dialog = FormationMenuDialog(this, it.data) {
                 viewModel.delete(it)
             }
+            dialog.show()
+        }
+        viewModel.uc.showImageDetailDialogObservable.observe(this) {
+            val dialog = ImageDetailsDialog(this, it)
             dialog.show()
         }
     }

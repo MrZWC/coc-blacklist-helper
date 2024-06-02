@@ -29,7 +29,7 @@ class Formation {
      */
     val description: String
     /**
-     * Type 0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批
+     * Type 0:冲杯，1:联赛，2:部落战，3：艺术，4：牛批，5：网红
      */
     val type: Int
     /**

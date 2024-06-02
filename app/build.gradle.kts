@@ -82,7 +82,7 @@ android {
                         bType = ".debug"
                     }
                     outputFileName =
-                        "悟空COC黑名单工具v" + defaultConfig.versionName + bType + ".apk"
+                        "悟空COC黑名单阵型工具v" + defaultConfig.versionName + bType + ".apk"
                 }
 
         }
@@ -113,4 +113,6 @@ dependencies {
     implementation(libs.timber)
     //log
     implementation(libs.klog)
+    //图片
+    implementation("com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0")
 }

@@ -110,6 +110,7 @@ class AddFormationDialog(val activity: FragmentActivity, private val callBack: (
                     R.id.ra_btn2 -> 2
                     R.id.ra_btn3 -> 3
                     R.id.ra_btn4 -> 4
+                    R.id.ra_btn5 -> 5
                     else -> 0
                 }
                 Formation(url, imageFilePath, binding.descriptionEdit.text.toString(), type, time)

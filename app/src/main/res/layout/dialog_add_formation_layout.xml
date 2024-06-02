@@ -153,11 +153,12 @@
         </LinearLayout>
 
 
-        <RadioGroup
+        <com.zwc.cocblacklisthelper.widget.GridRadioGroup
             android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:columnNum="4">
 
             <RadioButton
                 android:id="@+id/ra_btn0"
@@ -194,7 +195,14 @@
                 android:layout_height="wrap_content"
                 android:text="牛逼"
                 android:textSize="@dimen/sp_10" />
-        </RadioGroup>
+
+            <RadioButton
+                android:id="@+id/ra_btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网红"
+                android:textSize="@dimen/sp_10" />
+        </com.zwc.cocblacklisthelper.widget.GridRadioGroup>
 
         <TextView
             android:layout_width="wrap_content"

@@ -33,10 +33,12 @@ class FormationManageViewModel(application: Application) :
         //显示编辑地址弹窗
         var showEditDialogObservable: SingleLiveEvent<FormationItemViewModel>
         var showAddDialogObservable: SingleLiveEvent<Any>
+        var showImageDetailDialogObservable: SingleLiveEvent<String>
 
         init {
             showEditDialogObservable = SingleLiveEvent()
             showAddDialogObservable = SingleLiveEvent()
+            showImageDetailDialogObservable = SingleLiveEvent()
         }
     }
     private var tagType = -1

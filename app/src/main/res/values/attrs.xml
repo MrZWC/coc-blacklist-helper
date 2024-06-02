@@ -30,4 +30,7 @@
         <attr name="cl_borderSize" format="dimension|reference" />
         <attr name="cl_borderColor" format="color|reference" />
     </declare-styleable>
+    <declare-styleable name="GridRadioGroup">
+        <attr name="columnNum" format="integer" />
+    </declare-styleable>
 </resources>

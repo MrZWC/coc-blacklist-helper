@@ -10,6 +10,7 @@
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        onClickCommand="@{viewModel.imageOnClickCommand}"
         onLongClickCommand="@{viewModel.onLongClickCommand}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,9 +18,32 @@
         android:orientation="vertical"
         android:padding="8dp">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编号:"
+                android:textColor="@color/TextTitleColor"
+                android:textSize="@dimen/sp_13" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.IDObservableFile}"
+                android:textColor="@color/TextTitleColor"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
         <com.zwc.cocblacklisthelper.widget.ClipLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_2"
             android:background="@color/white"
             android:padding="4dp"
             app:cl_borderColor="#c96b6f"
@@ -69,10 +93,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
                 android:layout_marginStart="6dp"
                 android:text="@{viewModel.timeObservableFile}"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <TextView
