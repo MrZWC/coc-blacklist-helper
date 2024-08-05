@@ -94,6 +94,20 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    productFlavors {
+        create("prod") {
+            applicationIdSuffix = ".release"
+            namespace = "com.zwc.cocblacklisthelper"
+            applicationId = "com.zwc.cocblacklisthelper"
+            manifestPlaceholders += mutableMapOf("app_name" to "悟空COC")
+        }
+        create("dev") {
+            applicationIdSuffix = ".debug"
+            namespace = "com.zwc.cocblacklisthelper.dev"
+            applicationId = "com.zwc.cocblacklisthelper.dev"
+            manifestPlaceholders += mutableMapOf("app_name" to "悟空COCdev")
+        }
+    }
 }
 kapt {
     generateStubs = true
