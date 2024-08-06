@@ -18,6 +18,7 @@ android {
         versionCode = libs.versions.androidVersionCode.get().toInt()
         versionName = libs.versions.androidVersionName.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions+=listOf("dev")
     }
     signingConfigs {
         val properties = Properties()
@@ -95,17 +96,19 @@ android {
         jvmTarget = "1.8"
     }
     productFlavors {
-        create("prod") {
-            applicationIdSuffix = ".release"
-            namespace = "com.zwc.cocblacklisthelper"
-            applicationId = "com.zwc.cocblacklisthelper"
-            manifestPlaceholders += mutableMapOf("app_name" to "悟空COC")
-        }
         create("dev") {
+            dimension="dev"
             applicationIdSuffix = ".debug"
             namespace = "com.zwc.cocblacklisthelper.dev"
             applicationId = "com.zwc.cocblacklisthelper.dev"
             manifestPlaceholders += mutableMapOf("app_name" to "悟空COCdev")
+        }
+        create("prod") {
+            dimension="prod"
+            applicationIdSuffix = ".release"
+            namespace = "com.zwc.cocblacklisthelper"
+            applicationId = "com.zwc.cocblacklisthelper"
+            manifestPlaceholders += mutableMapOf("app_name" to "悟空COC")
         }
     }
 }
