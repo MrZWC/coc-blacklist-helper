@@ -41,14 +41,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10">
 
                 <androidx.constraintlayout.helper.widget.Flow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:flow_wrapMode="chain2"
                     app:constraint_referenced_ids="add_btn,delete_all_btn,share_btn,init_btn"
+                    app:flow_wrapMode="chain2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -62,20 +62,21 @@
 
                 <Button
                     android:id="@+id/delete_all_btn"
+                    onClickCommand="@{viewModel.deleteAllOnClickCommand}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    onClickCommand="@{viewModel.deleteAllOnClickCommand}"
                     android:text="删除所有" />
 
                 <Button
                     android:id="@+id/share_btn"
+                    onClickCommand="@{viewModel.shareOnClickCommand}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    onClickCommand="@{viewModel.shareOnClickCommand}"
                     android:text="分享黑名单" />
 
                 <Button
                     android:id="@+id/init_btn"
+                    onClickCommand="@{viewModel.initOnClickCommand}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="初始化默认黑名单" />

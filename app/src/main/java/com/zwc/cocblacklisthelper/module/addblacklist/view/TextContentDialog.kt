@@ -5,19 +5,14 @@ import android.os.Handler
 import android.os.Looper
 import android.view.ViewGroup
 import android.view.Window
-import com.socks.library.KLog
 import com.zwc.cocblacklisthelper.databinding.DialogTextContentLayoutBinding
+import com.zwc.cocblacklisthelper.utils.BlackListUtils
 import com.zwc.cocblacklisthelper.utils.KeyboardUtils
-import com.zwc.cocblacklisthelper.utils.StringUtils
-import com.zwc.databaselibrary.DataManager
-import com.zwc.databaselibrary.entity.User
 import com.zwc.viewdialog.ViewDialog
 import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
@@ -88,29 +83,7 @@ class TextContentDialog(
             ToastUtil.show("添加失败")
             //"\uD83C\uDD94"
         }) {
-            withContext(Dispatchers.IO) {
-                val valueText = "\n$textString"
-                val stringList = valueText.split("\n\uD83C\uDD94")
-                val list = mutableListOf<User>()
-                for (text in stringList) {
-                    val trimText = text.trim()
-                    //花海＃PL2VU899J 戦魂.昊天#YJYL8PGQ8##
-                    if (trimText.contains("挂黑名单按格式＃") || trimText.contains("赛季黑名单") || trimText.isEmpty()) {
-                        continue
-                    }
-                    val content = "\uD83C\uDD94" + trimText.let {
-                        if (it.contains("＃")) {
-                            it.replace("＃", "#")
-                        } else {
-                            it
-                        }
-                    }
-                    KLog.i(TAG, content)
-                    val userId = StringUtils.getStringId(content)
-                    list.add(User(userId, content))
-                }
-                DataManager.getUserManager().insertOrReplace(list)
-            }
+            BlackListUtils.saveBlackListText(textString)
             ToastUtil.show("添加成功")
             complete()
             hide()

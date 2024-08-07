@@ -17,6 +17,7 @@ import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
+import com.zwc.cocblacklisthelper.utils.BlackListUtils
 import com.zwc.cocblacklisthelper.utils.FileUtils
 import com.zwc.cocblacklisthelper.utils.TopActivity
 import com.zwc.cocblacklisthelper.widget.SearchEditText
@@ -31,7 +32,6 @@ import kotlinx.coroutines.withContext
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import timber.log.Timber
 import java.io.File
-import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -88,6 +88,23 @@ class AddBlackListViewModel(application: Application) :
                     "确定"
                 ) { dialog, which ->
                     shareBlackListTxt()
+                }
+                .setNegativeButton(
+                    "取消"
+                ) { dialog, which -> dialog.dismiss() }
+                .show()
+        }
+
+    })
+    var initOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
+        TopActivity.getInstance().get()?.apply {
+            AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("初始化黑名单会清除当前黑名单并加载默认黑名单数据，是否继续？")
+                .setPositiveButton(
+                    "确定"
+                ) { dialog, which ->
+                    initBlackList()
                 }
                 .setNegativeButton(
                     "取消"
@@ -180,12 +197,17 @@ class AddBlackListViewModel(application: Application) :
         viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
             Timber.e(throwable)
             dismissDialog()
+            ToastUtil.show("删除异常")
         }) {
-            DataManager.getUserManager().deleteAll()
-            observableList.clear()
-            allObservableList.clear()
-            dismissDialog()
+            executeDelete()
         }
+    }
+
+    private suspend fun executeDelete() {
+        DataManager.getUserManager().deleteAll()
+        observableList.clear()
+        allObservableList.clear()
+        dismissDialog()
     }
 
     private fun shareBlackListTxt() {
@@ -206,7 +228,11 @@ class AddBlackListViewModel(application: Application) :
                     val sDateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA)
                     val curDateTime = Date()
                     val timeString = sDateFormat.format(curDateTime)
-                    val filePath = it.absolutePath + "/share/" + "悟空黑名单分享${timeString}.hmd"
+                    val shareFile = File(it.absolutePath + "/share")
+                    if (shareFile.exists()) {
+                        com.zwc.baselibrary.util.FileUtils.delete(shareFile)
+                    }
+                    val filePath = shareFile.absolutePath + "/悟空黑名单分享${timeString}.hmd"
                     if (FileUtils.writeTxt(filePath, stringBuilder.toString())) {
                         return@withContext filePath
                     }
@@ -222,9 +248,25 @@ class AddBlackListViewModel(application: Application) :
         }
     }
 
+    private fun initBlackList() {
+        showDialog()
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            dismissDialog()
+            ToastUtil.show("出初始化异常")
+        }) {
+            executeDelete()
+            val inputStream = application.assets.open("default_black_list.hmd")
+            val content = inputStream.bufferedReader().use { it.readText() }
+            BlackListUtils.saveBlackListText(content)
+            loadData()
+
+        }
+    }
+
     private fun share(filePath: String) {
         TopActivity.getInstance().get()?.let {
-            val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("hmd")?: "*/*"
+            val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("hmd") ?: "*/*"
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = mimeType
             val uri = FileProvider.getUriForFile(
