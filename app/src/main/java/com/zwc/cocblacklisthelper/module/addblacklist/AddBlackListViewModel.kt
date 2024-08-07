@@ -2,6 +2,9 @@ package com.zwc.cocblacklisthelper.module.addblacklist
 
 import android.app.AlertDialog
 import android.app.Application
+import android.content.Intent
+import android.webkit.MimeTypeMap
+import androidx.core.content.FileProvider
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.viewModelScope
@@ -12,17 +15,20 @@ import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
+import com.zwc.cocblacklisthelper.utils.FileUtils
 import com.zwc.cocblacklisthelper.utils.TopActivity
 import com.zwc.cocblacklisthelper.widget.SearchEditText
 import com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
 import com.zwc.databaselibrary.DataManager
 import com.zwc.databaselibrary.entity.User
+import io.github.idonans.core.util.ToastUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import timber.log.Timber
+import java.io.File
 
 class AddBlackListViewModel(application: Application) :
     BaseViewModel<AddBlackListModel>(application, AddBlackListModel()) {
@@ -54,10 +60,28 @@ class AddBlackListViewModel(application: Application) :
     var deleteAllOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         TopActivity.getInstance().get()?.apply {
             AlertDialog.Builder(this)
+                .setTitle("提示")
                 .setMessage("确定删除所有黑名单吗？")
                 .setPositiveButton(
                     "确定"
                 ) { dialog, which -> deleteAll() }
+                .setNegativeButton(
+                    "取消"
+                ) { dialog, which -> dialog.dismiss() }
+                .show()
+        }
+
+    })
+    var shareOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
+        TopActivity.getInstance().get()?.apply {
+            AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("已txt文件格式分享黑名单")
+                .setPositiveButton(
+                    "确定"
+                ) { dialog, which ->
+                    shareBlackListTxt()
+                }
                 .setNegativeButton(
                     "取消"
                 ) { dialog, which -> dialog.dismiss() }
@@ -155,5 +179,52 @@ class AddBlackListViewModel(application: Application) :
             allObservableList.clear()
             dismissDialog()
         }
+    }
+
+    private fun shareBlackListTxt() {
+        showDialog()
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            dismissDialog()
+            ToastUtil.show("文件生成异常")
+        }) {
+            val users = DataManager.getUserManager().getAll()
+            val filePath = withContext(Dispatchers.IO) {
+                val stringBuilder = StringBuilder()
+                for (user in users) {
+                    stringBuilder.append(user.text)
+                    stringBuilder.append("\n")
+                }
+                application.externalCacheDir?.let {
+                    val filePath = it.absolutePath + "/" + "blacklist.txt"
+                    if (FileUtils.writeTxt(filePath, stringBuilder.toString())) {
+                        return@withContext filePath
+                    }
+                    ""
+                }
+            }
+            dismissDialog()
+            if (!filePath.isNullOrEmpty()) {
+                share(filePath)
+            } else {
+                ToastUtil.show("文件生成失败")
+            }
+        }
+    }
+
+    private fun share(filePath: String) {
+        TopActivity.getInstance().get()?.let {
+            val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("txt")
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = mimeType
+            val uri = FileProvider.getUriForFile(
+                it,
+                it.packageName + ".provider",
+                File(filePath)
+            )
+            intent.putExtra(Intent.EXTRA_STREAM, uri)
+            it.startActivity(Intent.createChooser(intent, "分享"))
+        }
+
     }
 }

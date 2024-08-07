@@ -9,7 +9,7 @@ import java.io.FileOutputStream
  * Description:描述
  */
 object FileUtils {
-    fun writeTxt(fileName: String, content: String) {
+    fun writeTxt(fileName: String, content: String): Boolean {
         try {
             val file = File(fileName)
             if (!file.exists()) {
@@ -18,8 +18,10 @@ object FileUtils {
             val fileOutputStream = FileOutputStream(file)
             fileOutputStream.write(content.toByteArray())
             fileOutputStream.close()
+            return true
         } catch (e: Exception) {
             e.printStackTrace()
+            return false
         }
     }
 }

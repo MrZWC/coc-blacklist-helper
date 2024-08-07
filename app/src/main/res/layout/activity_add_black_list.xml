@@ -71,6 +71,7 @@
                     android:id="@+id/share_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    onClickCommand="@{viewModel.shareOnClickCommand}"
                     android:text="分享黑名单" />
 
                 <Button
