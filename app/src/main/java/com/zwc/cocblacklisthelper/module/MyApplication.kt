@@ -3,6 +3,7 @@ package com.zwc.cocblacklisthelper.module
 import android.app.Application
 import com.socks.library.KLog
 import com.zwc.cocblacklisthelper.BuildConfig
+import com.zwc.cocblacklisthelper.utils.TopActivity
 import com.zwc.databaselibrary.DataManager
 import timber.log.Timber
 
@@ -27,5 +28,13 @@ class MyApplication : Application() {
         KLog.init(BuildConfig.DEBUG)
         Timber.plant(Timber.DebugTree())
         DataManager.init(this)
+        //closeAndroidPDialog();
+        //        AlivcLivePusher.showDebugView(this);
+        //        数据库日志
+        //        QueryBuilder.LOG_SQL = true;
+        //        QueryBuilder.LOG_VALUES = true;
+        registerActivityLifecycleCallbacks(
+            TopActivity.getInstance().activityLifecycleCallbacks
+        )
     }
 }

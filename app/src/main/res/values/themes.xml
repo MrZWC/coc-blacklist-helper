@@ -8,4 +8,7 @@
     <style name="Theme.Cocblacklisthelper" parent="Base.Theme.Cocblacklisthelper" >
        <item name="android:windowBackground">@color/background</item>"
     </style>
+    <style name="MyAppBaseTheme" parent="Theme.Cocblacklisthelper" >
+
+    </style>
 </resources>

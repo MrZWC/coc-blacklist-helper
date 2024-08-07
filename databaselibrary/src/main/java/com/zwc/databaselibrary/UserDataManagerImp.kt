@@ -39,6 +39,11 @@ internal class UserDataManagerImp private constructor() : UserDataManager() {
         userDao.delete(user)
     }
 
+    override suspend fun deleteAll() {
+        val userDao = getAppDatabase().userDao()
+        userDao.deleteAll()
+    }
+
     override suspend fun update(user: User) {
         val userDao = getAppDatabase().userDao()
         userDao.update(user)

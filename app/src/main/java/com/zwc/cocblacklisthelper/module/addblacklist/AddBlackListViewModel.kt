@@ -1,5 +1,6 @@
 package com.zwc.cocblacklisthelper.module.addblacklist
 
+import android.app.AlertDialog
 import android.app.Application
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableInt
@@ -11,6 +12,7 @@ import com.zwc.baselibrary.bus.event.SingleLiveEvent
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.module.addblacklist.item.BlackListUserItemViewModel
+import com.zwc.cocblacklisthelper.utils.TopActivity
 import com.zwc.cocblacklisthelper.widget.SearchEditText
 import com.zwc.cocblacklisthelper.widget.loading.MyLoadingLayout
 import com.zwc.databaselibrary.DataManager
@@ -28,7 +30,6 @@ class AddBlackListViewModel(application: Application) :
     var observableList = ObservableArrayList<BlackListUserItemViewModel>()
     var allObservableList = ObservableArrayList<BlackListUserItemViewModel>()
     var loadingShowTypeField = ObservableInt(MyLoadingLayout.LOADING)
-    var totalNumberObservableInt = ObservableInt(0)
     override fun onCreate() {
         super.onCreate()
     }
@@ -49,6 +50,20 @@ class AddBlackListViewModel(application: Application) :
 
     var addContentOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         uc.showAddContentDialogObservable.call()
+    })
+    var deleteAllOnClickCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
+        TopActivity.getInstance().get()?.apply {
+            AlertDialog.Builder(this)
+                .setMessage("确定删除所有黑名单吗？")
+                .setPositiveButton(
+                    "确定"
+                ) { dialog, which -> deleteAll() }
+                .setNegativeButton(
+                    "取消"
+                ) { dialog, which -> dialog.dismiss() }
+                .show()
+        }
+
     })
 
     init {
@@ -77,7 +92,6 @@ class AddBlackListViewModel(application: Application) :
         allObservableList.addAll(itemList)
         observableList.clear()
         observableList.addAll(allObservableList)
-        totalNumberObservableInt.set(observableList.size)
         loadingShowTypeField.set(MyLoadingLayout.CONTENT)
     }
 
@@ -104,7 +118,6 @@ class AddBlackListViewModel(application: Application) :
             DataManager.getUserManager().delete(item.data)
             observableList.remove(item)
             allObservableList.remove(item)
-            totalNumberObservableInt.set(totalNumberObservableInt.get() - 1)
         }
     }
 
@@ -128,6 +141,19 @@ class AddBlackListViewModel(application: Application) :
             val itemList = createItemList(users)
             observableList.clear()
             observableList.addAll(itemList)
+        }
+    }
+
+    private fun deleteAll() {
+        showDialog()
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            dismissDialog()
+        }) {
+            DataManager.getUserManager().deleteAll()
+            observableList.clear()
+            allObservableList.clear()
+            dismissDialog()
         }
     }
 }

@@ -60,7 +60,7 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
         binding.confirmBtn.setOnClickListener {
             val text = "挂黑名单按格式（私）发我，必须私发，才能快速找到谁挂的谁，骗子结账也好找对人\n" +
                     "5月赛季黑名单\n" +
-                    "\uD83C\uDD94少年的你✨言喏#LY0R0PQUP\n"+
+                    "\uD83C\uDD94少年的你✨言喏#LY0R0PQUP\n" +
                     "\uD83C\uDD94花海＃PL2VU899J"
             handleData(binding.editText.text.toString())
             //handleData(text)
@@ -88,10 +88,16 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
                 for (text in stringList) {
                     val trimText = text.trim()
                     //花海＃PL2VU899J 戦魂.昊天#YJYL8PGQ8##
-                    if (trimText.contains("挂黑名单按格式＃") || trimText.contains("赛季黑名单")||trimText.isEmpty()) {
+                    if (trimText.contains("挂黑名单按格式＃") || trimText.contains("赛季黑名单") || trimText.isEmpty()) {
                         continue
                     }
-                    val content = "\uD83C\uDD94" + trimText
+                    val content = "\uD83C\uDD94" + trimText.let {
+                        if (it.contains("＃")) {
+                            it.replace("＃", "#")
+                        } else {
+                            it
+                        }
+                    }
                     KLog.i(TAG, content)
                     val userId = StringUtils.getStringId(content)
                     list.add(User(userId, content))

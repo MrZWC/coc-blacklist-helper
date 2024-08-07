@@ -2,6 +2,7 @@ package com.zwc.databaselibrary.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
+import androidx.room.DeleteTable
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -32,6 +33,9 @@ interface UserDao {
 
     @Delete
     suspend fun delete(list: MutableList<User>)
+
+    @Query("DELETE FROM user")
+    suspend fun deleteAll()
 
     /**
      * 更具id查询黑名单用户
