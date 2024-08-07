@@ -14,6 +14,7 @@ import com.socks.library.KLog
 import com.zwc.baselibrary.base.LoadingDialog
 import com.zwc.cocblacklisthelper.R
 import com.zwc.cocblacklisthelper.databinding.DialogAddFormationLayoutBinding
+import com.zwc.cocblacklisthelper.utils.FileUtils
 import com.zwc.cocblacklisthelper.utils.KeyboardUtils
 import com.zwc.databaselibrary.DataManager
 import com.zwc.databaselibrary.entity.Formation
@@ -95,10 +96,11 @@ class AddFormationDialog(val activity: FragmentActivity, private val callBack: (
             ToastUtil.show(throwable.message)
         }) {
             val data = withContext(Dispatchers.IO) {
-                val imageFilePath = copyUriToAppInternalStorage(
+                val filePath =activity.getExternalFilesDir(null)!!.absolutePath+File.separator+"formationImage"+File.separator+"${System.currentTimeMillis()}.jpg"
+                val imageFilePath = FileUtils.copyUriToAppInternalStorage(
                     activity,
                     imageUri!!,
-                    "${System.currentTimeMillis()}.jpg"
+                    filePath
                 )
                 if (imageFilePath.isNullOrEmpty()) {
 
@@ -145,45 +147,4 @@ class AddFormationDialog(val activity: FragmentActivity, private val callBack: (
         }
     }
 
-    /**
-     * 复制文件到应用内
-     * @param context Context
-     * @param fileUri Uri?
-     * @param fileName String?
-     */
-    fun copyUriToAppInternalStorage(context: Context, fileUri: Uri, fileName: String): String? {
-        try {
-            // 获取内容解析器
-            val contentResolver = context.contentResolver
-            // 打开URI对应文件的输入流
-            val inputStream = contentResolver.openInputStream(fileUri)
-
-            // 确保文件不为空
-            if (inputStream != null) {
-                // 获取应用私有目录的输出流
-                val file = File(context.getExternalFilesDir(null), fileName)
-                val outputStream = FileOutputStream(file)
-
-                // 创建缓冲区
-                val buffer = ByteArray(1024)
-                var length: Int
-
-                // 读写文件
-                while (inputStream.read(buffer).also { length = it } != -1) {
-                    outputStream.write(buffer, 0, length)
-                }
-
-                // 关闭流
-                outputStream.flush()
-                outputStream.close()
-                inputStream.close()
-                return file.absolutePath
-            } else {
-                return null
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return null
-    }
 }

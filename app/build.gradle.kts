@@ -15,10 +15,10 @@ android {
         applicationId = "com.zwc.cocblacklisthelper"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = libs.versions.androidVersionCode.get().toInt()
-        versionName = libs.versions.androidVersionName.get()
+        versionCode = 5
+        versionName = "2.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        flavorDimensions+=listOf("dev")
+        flavorDimensions += listOf("default")
     }
     signingConfigs {
         val properties = Properties()
@@ -78,12 +78,18 @@ android {
         outputs.all {
             if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl)
                 if (outputFile.name.endsWith(".apk")) {
+                    var flavorName = flavorName
+                    if (flavorName != "dev") {
+                        flavorName = ""
+                    } else {
+                        flavorName = ".dev"
+                    }
                     var bType = ""
                     if (buildType.name == com.android.builder.core.BuilderConstants.DEBUG) {
                         bType = ".debug"
                     }
                     outputFileName =
-                        "悟空COC黑名单阵型工具v" + defaultConfig.versionName + bType + ".apk"
+                        "悟空COC黑名单阵型工具v" + defaultConfig.versionName + flavorName + bType + ".apk"
                 }
 
         }
@@ -97,17 +103,12 @@ android {
     }
     productFlavors {
         create("dev") {
-            dimension="dev"
-            applicationIdSuffix = ".debug"
-            namespace = "com.zwc.cocblacklisthelper.dev"
-            applicationId = "com.zwc.cocblacklisthelper.dev"
+            dimension = "default"
+            applicationIdSuffix = ".dev"
             manifestPlaceholders += mutableMapOf("app_name" to "悟空COCdev")
         }
         create("prod") {
-            dimension="prod"
-            applicationIdSuffix = ".release"
-            namespace = "com.zwc.cocblacklisthelper"
-            applicationId = "com.zwc.cocblacklisthelper"
+            dimension = "default"
             manifestPlaceholders += mutableMapOf("app_name" to "悟空COC")
         }
     }

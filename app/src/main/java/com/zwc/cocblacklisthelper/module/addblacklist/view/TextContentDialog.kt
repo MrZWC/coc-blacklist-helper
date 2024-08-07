@@ -25,7 +25,11 @@ import timber.log.Timber
  * DAte:2024-05-24 13:40
  * Description:描述
  */
-class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
+class TextContentDialog(
+    activity: Activity,
+    private val content: String?,
+    private var complete: () -> Unit
+) {
     private val binding: DialogTextContentLayoutBinding
     private val mActivity: Activity = activity
     private val mViewDialog: ViewDialog
@@ -57,6 +61,9 @@ class TextContentDialog(activity: Activity, private var complete: () -> Unit) {
     }
 
     private fun initData() {
+        if (!content.isNullOrEmpty()) {
+            binding.editText.setText(content)
+        }
         binding.confirmBtn.setOnClickListener {
             val text = "挂黑名单按格式（私）发我，必须私发，才能快速找到谁挂的谁，骗子结账也好找对人\n" +
                     "5月赛季黑名单\n" +

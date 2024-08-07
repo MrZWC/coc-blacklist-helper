@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.socks.library.KLog
 import com.zwc.baselibrary.base.BaseActivity
 import com.zwc.cocblacklisthelper.BR
 import com.zwc.cocblacklisthelper.R
@@ -35,18 +36,19 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
                 outRect.top = 2
             }
         })
+        intent.data?.let {
+            KLog.i("BlackListFilePath", it)
+            viewModel.importBlackList(it)
+        }
     }
 
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.uc.showAddContentDialogObservable.observe(this) {
-            val textContentDialog = TextContentDialog(this) {
-                viewModel.loadData()
-            }
-            textContentDialog.show()
+            showAddContentDialog(it)
         }
         viewModel.uc.showEditDialogObservable.observe(this) {
-            val editDialog = UserMenuDialog(this, it.data,false, {
+            val editDialog = UserMenuDialog(this, it.data, false, {
                 //删除
                 viewModel.delete(it)
             }, {
@@ -58,6 +60,17 @@ class AddBlackListActivity : BaseActivity<ActivityAddBlackListBinding, AddBlackL
             })
             editDialog.show()
         }
+    }
+
+    private fun showAddContentDialog(content: String? = "") {
+        val textContentDialog = TextContentDialog(this, content) {
+            viewModel.loadData()
+        }
+        textContentDialog.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun initContentView(savedInstanceState: Bundle?): Int {

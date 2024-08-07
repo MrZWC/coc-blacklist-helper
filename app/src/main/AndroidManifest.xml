@@ -52,9 +52,38 @@
         <activity
             android:name=".module.addblacklist.AddBlackListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*"/>
+                <data android:host="*" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:pathPattern="/.*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd" />
+                <data android:pathPattern="/.*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.hmd..bin" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

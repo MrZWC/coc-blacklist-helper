@@ -3,11 +3,13 @@ package com.zwc.cocblacklisthelper.module.addblacklist
 import android.app.AlertDialog
 import android.app.Application
 import android.content.Intent
+import android.net.Uri
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.viewModelScope
+import com.socks.library.KLog
 import com.zwc.baselibrary.base.BaseViewModel
 import com.zwc.baselibrary.binding.command.BindingAction
 import com.zwc.baselibrary.binding.command.BindingCommand
@@ -29,6 +31,10 @@ import kotlinx.coroutines.withContext
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import timber.log.Timber
 import java.io.File
+import java.nio.charset.Charset
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddBlackListViewModel(application: Application) :
     BaseViewModel<AddBlackListModel>(application, AddBlackListModel()) {
@@ -44,8 +50,9 @@ class AddBlackListViewModel(application: Application) :
     var uc: UIChangeObservable = UIChangeObservable()
 
     inner class UIChangeObservable {
+        var showAddContentDialogObservable: SingleLiveEvent<String?>
+
         //显示编辑地址弹窗
-        var showAddContentDialogObservable: SingleLiveEvent<Any>
         var showEditDialogObservable: SingleLiveEvent<BlackListUserItemViewModel>
 
         init {
@@ -76,7 +83,7 @@ class AddBlackListViewModel(application: Application) :
         TopActivity.getInstance().get()?.apply {
             AlertDialog.Builder(this)
                 .setTitle("提示")
-                .setMessage("已txt文件格式分享黑名单")
+                .setMessage("以文件格式分享黑名单")
                 .setPositiveButton(
                     "确定"
                 ) { dialog, which ->
@@ -196,7 +203,10 @@ class AddBlackListViewModel(application: Application) :
                     stringBuilder.append("\n")
                 }
                 application.externalCacheDir?.let {
-                    val filePath = it.absolutePath + "/" + "blacklist.txt"
+                    val sDateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA)
+                    val curDateTime = Date()
+                    val timeString = sDateFormat.format(curDateTime)
+                    val filePath = it.absolutePath + "/share/" + "悟空黑名单分享${timeString}.hmd"
                     if (FileUtils.writeTxt(filePath, stringBuilder.toString())) {
                         return@withContext filePath
                     }
@@ -214,7 +224,7 @@ class AddBlackListViewModel(application: Application) :
 
     private fun share(filePath: String) {
         TopActivity.getInstance().get()?.let {
-            val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("txt")
+            val mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("hmd")?: "*/*"
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = mimeType
             val uri = FileProvider.getUriForFile(
@@ -226,5 +236,34 @@ class AddBlackListViewModel(application: Application) :
             it.startActivity(Intent.createChooser(intent, "分享"))
         }
 
+    }
+
+    /**
+     * 导入黑名单
+     * @param uri Uri
+     */
+    fun importBlackList(uri: Uri) {
+        showDialog()
+        viewModelScope.launch(CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+            dismissDialog()
+        }) {
+            val content = withContext(Dispatchers.IO) {
+                val filePath =
+                    application.externalCacheDir!!.absolutePath + "/import/" + "blacklist.txt"
+                FileUtils.copyUriToAppInternalStorage(application, uri, filePath)
+                val content = FileUtils.readTxt(filePath)
+                KLog.i("importText", content)
+                content
+            }
+            dismissDialog()
+            uc.showAddContentDialogObservable.value = content
+            /* if (!filePath.isNullOrEmpty()) {
+                 val users = FileUtils.readTxt(filePath)
+                 if (users.isNotEmpty()) {
+                     DataManager.getUserManager().insertAll(users)
+                 }
+             }*/
+        }
     }
 }
